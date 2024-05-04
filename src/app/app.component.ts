@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UserListComponent } from './user-list-component/user-list-component.component';
+import { UserListComponent } from './modules/users/components/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({

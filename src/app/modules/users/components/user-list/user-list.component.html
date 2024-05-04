@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let user of users">
+      {{ user.lastname ? user.lastname + ' ' + user.firstname : user.organisation_name }}
+    </li>
+  </ul>

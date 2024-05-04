@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <select name="role" ngModel (ngModelChange)="onRoleChange($event)" required>
+    <option value="" disabled>Sélectionner un rôle</option>
+    <option value="membre">Membre</option>
+    <option value="organisme">Organisme</option>
+  </select>
+
+  <div *ngIf="role === 'membre'">
+    <input type="text" name="firstname" ngModel required placeholder="Prénom">
+    <input type="text" name="lastname" ngModel required placeholder="Nom">
+  </div>
+
+  <div *ngIf="role === 'organisme'">
+    <input type="text" name="organisation_name" ngModel required placeholder="Nom de l'Organisme">
+  </div>
+
+  <input type="email" name="mail" ngModel required placeholder="Email">
+  <input type="password" name="password" ngModel required placeholder="Mot de passe">
+  <button type="submit">Créer utilisateur</button>
+</form>
