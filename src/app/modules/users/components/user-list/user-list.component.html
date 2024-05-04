@@ -1,5 +1,7 @@
 <ul>
     <li *ngFor="let user of users">
-      {{ user.lastname ? user.lastname + ' ' + user.firstname : user.organisation_name }}
+      {{ user.role + ' :' + (user.lastname ? user.lastname + ' ' + user.firstname : user.organisation_name) }}
+      <button (click)="deleteUser(user._id)">Supprimer</button>
+      <button (click)="updateUser(user._id)">Modifier</button>
     </li>
   </ul>

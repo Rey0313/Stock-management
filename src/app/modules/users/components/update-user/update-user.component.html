@@ -1,0 +1,6 @@
+<form (ngSubmit)="onSubmit()" #updateForm="ngForm">
+    <input type="text" name="firstname" [(ngModel)]="user.firstname" required placeholder="Prénom">
+    <input type="text" name="lastname" [(ngModel)]="user.lastname" required placeholder="Nom">
+    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email">
+    <button type="submit">Mettre à jour</button>
+  </form>
