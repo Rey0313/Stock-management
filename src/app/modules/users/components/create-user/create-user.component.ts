@@ -29,7 +29,6 @@ export class CreateUserComponent {
       const formData = { ...form.value, password: this.encryptPassword(form.value.password) };
       this.userService.createUser(formData).subscribe({
         next: (user) => {
-          console.log('Utilisateur créé:', user);
           this.router.navigate(['/users']);  
         },
         error: (error) => console.error(error)
