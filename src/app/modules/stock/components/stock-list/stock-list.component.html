@@ -1,0 +1,10 @@
+<h1>Stock :</h1>
+
+<div *ngFor="let type of (groupedMaterials | keyvalue)">
+  <h2>{{ type.key }}</h2>
+  <ul>
+    <li *ngFor="let material of type.value">
+      {{ material.name ? material.name : 'Nom non disponible' }}
+    </li>
+  </ul>
+</div>
