@@ -1,6 +1,13 @@
 <form (ngSubmit)="onSubmit()" #updateForm="ngForm">
+  <div *ngIf="user.role === 'organisme'">
+    <input type="text" name="organisation_name" [(ngModel)]="user.organisation_name" required placeholder="Nom de l'organisation">
+  </div>
+
+  <div *ngIf="user.role === 'membre'">
     <input type="text" name="firstname" [(ngModel)]="user.firstname" required placeholder="Prénom">
     <input type="text" name="lastname" [(ngModel)]="user.lastname" required placeholder="Nom">
-    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email">
-    <button type="submit">Mettre à jour</button>
-  </form>
+  </div>
+
+  <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email">
+  <button type="submit">Mettre à jour</button>
+</form>

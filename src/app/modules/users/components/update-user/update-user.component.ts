@@ -3,11 +3,12 @@ import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-user',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css']
 })
