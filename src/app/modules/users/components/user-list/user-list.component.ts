@@ -4,19 +4,19 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user-list',
-  standalone: true,
-  imports: [CommonModule, HttpClientModule],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+    selector: 'app-user-list',
+    standalone: true,
+    imports: [CommonModule, HttpClientModule],
+    templateUrl: './user-list.component.html',
+    styleUrl: './user-list.component.css'
 })
 export class UserListComponent {
-  users: any[] = [];
+    users: any[] = [];
 
-  constructor(private userService: UserService) { }
+    constructor(private userService: UserService) { }
 
-  ngOnInit(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
-  }
+    ngOnInit(): void {
+        this.userService.getUsers()
+            .subscribe(users => this.users = users);
+    }
 }
