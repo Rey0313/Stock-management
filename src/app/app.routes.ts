@@ -8,7 +8,8 @@ import { LoginComponent } from './modules/authentication/components/login/login.
 export const routes: Routes = [
     { path: 'users', component: UserListComponent },
     { path: 'create-user', component: CreateUserComponent },
-    { path: 'stock-list', component:  StockListComponent}
+    { path: 'stock-list', component:  StockListComponent},
+    { path: 'update-user/:id', component:  UpdateUserComponent},
     { path: 'login', component: LoginComponent }
 ];
 
