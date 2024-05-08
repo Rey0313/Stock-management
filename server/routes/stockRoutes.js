@@ -4,6 +4,7 @@ var stockController = require('../controllers/stockController');
 
 
 router.get('/', stockController.getAllMaterials);
+router.post('/', stockController.addMaterial);
 
 
 module.exports = router;

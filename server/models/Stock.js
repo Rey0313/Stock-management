@@ -11,6 +11,7 @@ var assignmentSchema = new Schema({
 
 var materialSchema = new Schema({
     type: { type: String, required: true },
+    name: { type: String, required: true },
     renewal_date: Date,
     isStored: { type: Boolean, required: true },
     room: { type: Schema.Types.ObjectId, ref: 'Room' },

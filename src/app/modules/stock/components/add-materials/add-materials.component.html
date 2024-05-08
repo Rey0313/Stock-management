@@ -1,1 +1,15 @@
-<p>add-materials works!</p>
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <select name="type" ngModel required>
+        <option value="" disabled>Sélectionner un type de matériel</option>
+        <option value="Matériel informatique">Matériel informatique</option>
+        <option value="Meuble">Meuble</option>
+        <option value="Papeterie">Papeterie</option>
+    </select>
+    
+    <input type="text" name="name" ngModel required placeholder="Nom du matériel">
+    
+    <input type="date" name="renewal_date" ngModel required placeholder="Date de renouvellement du matériel">
+    
+    <button type="submit">Ajouter matériel</button>
+</form>
+  

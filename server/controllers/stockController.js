@@ -8,3 +8,15 @@ exports.getAllMaterials = async (req, res) => {
         res.status(500).send('Erreur lors de la récupération des utilisateurs : ' + err);
     }
 };
+
+exports.addMaterial = async (req, res) => {
+    try {
+        const newMaterial = new Stock({
+            ...req.body,
+        });
+        await newMaterial.save();
+        res.status(201).json(newMaterial);
+    } catch (err) {
+        res.status(500).send('Erreur lors de la création de l’utilisateur : ' + err);
+    }
+};
