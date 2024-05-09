@@ -5,6 +5,7 @@
   <ul>
     <li *ngFor="let material of type.value">
       {{ material.name ? material.name : 'Nom non disponible' }}
+      <button (click)="askAssigned(material._id)">Demande d'attribution</button>
     </li>
   </ul>
 </div>

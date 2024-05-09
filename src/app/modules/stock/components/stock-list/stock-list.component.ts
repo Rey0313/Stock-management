@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { StockService } from '../../services/stock.service';
+import { RequestsService } from '../../../requests/services/requests.service';
 
 @Component({
     selector: 'app-stock-list',
@@ -16,28 +17,42 @@ export class StockListComponent {
     materialsList: any[] = [];
     groupedMaterials: { [type: string]: any[] } = {};
 
-    constructor(private stockService: StockService) { }
+    constructor(
+        private stockService: StockService,
+        private requestService: RequestsService
+    ) { }
 
     ngOnInit(): void {
         this.stockService.getMaterialsList().subscribe({
             next: (materialsList) => {
-              this.materialsList = materialsList;
-              this.groupMaterialsByType();
+                this.materialsList = materialsList;
+                this.groupMaterialsByType();
             },
             error: (error) => {
-              console.error('Error loading materials:', error);
+                console.error('Error loading materials:', error);
             }
         });
     }
 
     private groupMaterialsByType() {
         this.groupedMaterials = this.materialsList.reduce((acc, material) => {
-          const type = material.type || 'Unknown'; // Use 'name' if it's supposed to be 'name'
-          if (!acc[type]) {
-            acc[type] = [];
-          }
-          acc[type].push(material);
-          return acc;
+            const type = material.type || 'Unknown'; // Use 'name' if it's supposed to be 'name'
+            if (!acc[type]) {
+                acc[type] = [];
+            }
+            acc[type].push(material);
+            return acc;
         }, {});
-      }
+    }
+
+    askAssigned(materialId: any) {
+        this.requestService.askAssigned(materialId).subscribe({
+            next: (response) => {
+              console.log('Demande créée avec succès', response);
+            },
+            error: (error) => {
+              console.error('Erreur lors de la création de la demande', error);
+            }
+          });
+    }
 }
