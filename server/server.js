@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const stockRoutes = require('./routes/stockRoutes');
+const requestRoutes = require('./routes/requestRoutes');
 const cors = require('cors');
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/materials', stockRoutes);
+app.use('/api/requests', requestRoutes);
 
 async function startServer() {
     try {

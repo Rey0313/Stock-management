@@ -20,9 +20,9 @@ export class StockService {
 
     addMaterial(material: any): Observable<any> {
         return this.http.post<any>(this.apiUrl, material).pipe(
-          catchError((error) => {
-            throw "Erreur lors de l'ajout du matériel: " + error;
-          })
+            catchError((error) => {
+                throw "Erreur lors de l'ajout du matériel: " + error;
+            })
         );
     }
 }
