@@ -1,4 +1,7 @@
 var Request = require('../models/Request');
+const ObjectId = require('mongodb').ObjectId;
+
+
 
 exports.getAllRequests = async (req, res) => {
     try {
@@ -8,7 +11,7 @@ exports.getAllRequests = async (req, res) => {
                     from: "users",
                     localField: "user",
                     foreignField: "_id", 
-                    as: "userData" 
+                    as: "userData" ,
                 }
             },
             {
@@ -24,6 +27,56 @@ exports.getAllRequests = async (req, res) => {
             },
             {
                 $unwind: "$materialData"
+            },
+            {
+                $project: {
+                    _id: 0,
+                    status: 1,
+                    request_date: 1, 
+                    "userFirstname": "$userData.firstname",
+                    "userLastname": "$userData.lastname",
+                    "materialType": "$materialData.type",
+                    "materialName": "$materialData.name"
+                }
+            },
+        ]);
+        res.json(requests);
+    } catch (err) {
+        res.status(500).send('Erreur lors de la récupération des demandes : ' + err);
+    }
+};
+
+exports.getMyRequests = async (req, res) => {
+    try {
+        const requests = await Request.aggregate([
+            {
+                $match: {
+                    user: {"$oid": '663b8bbb711b14a1cfc4084d' }
+                }
+            },
+            {   
+                $lookup: {
+                    from: "users",
+                    localField: "user",
+                    foreignField: "_id", 
+                    as: "userData",
+                }
+            },
+            {
+                $lookup: {
+                    from: "materials",
+                    localField: "material",
+                    foreignField: "_id",
+                    as: "materialData"
+                }
+            },
+            {
+                $unwind: "$userData",
+                preserveNullAndEmptyArrays: true
+            },
+            {
+                $unwind: "$materialData",
+                preserveNullAndEmptyArrays: true
             },
             {
                 $project: {

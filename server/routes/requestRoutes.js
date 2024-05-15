@@ -4,6 +4,7 @@ var requestController = require('../controllers/requestController');
 
 
 router.get('/', requestController.getAllRequests);
+router.get('/:id', requestController.getMyRequests);
 router.post('/', requestController.createRequest);
 
 
