@@ -20,6 +20,7 @@ export class MyRequestListComponent {
         this.requestService.getMyRequestsList()
             .subscribe(requests => {
                 this.requests = requests;
+                console.log('Requests:', this.requests);
             });
     }
 }

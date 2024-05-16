@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class RequestsService {
 
     private apiUrl = 'http://localhost:3000/api/requests';
-    private userId = '663b8bbb711b14a1cfc4084d'; 
+    private userId = '664229de20a6e06f920e9761'; 
 
     constructor(private http: HttpClient) { }
 
@@ -18,11 +18,12 @@ export class RequestsService {
     }
 
     getMyRequestsList(): Observable<any[]> {
-        return this.http.get<any>(`${this.apiUrl}/${this.userId}`);
-    }
+        const userId = '664229de20a6e06f920e9761'; // Assure-toi de bien utiliser l'ID utilisateur correct ici
+        return this.http.get<any[]>(`${this.apiUrl}/${userId}`);
+      }
 
     askAssigned(materialId: string): Observable<any[]>  {
-        const userId = '66300bcd3db89c85b82fb934';
+        const userId = '664229de20a6e06f920e9761';
         return this.http.post<any>(this.apiUrl, {
             user: userId,
             material: materialId,

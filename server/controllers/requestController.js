@@ -1,7 +1,6 @@
-var Request = require('../models/Request');
-const ObjectId = require('mongodb').ObjectId;
-
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
+const Request = require('../models/Request');
 
 exports.getAllRequests = async (req, res) => {
     try {
@@ -10,8 +9,8 @@ exports.getAllRequests = async (req, res) => {
                 $lookup: {
                     from: "users",
                     localField: "user",
-                    foreignField: "_id", 
-                    as: "userData" ,
+                    foreignField: "_id",
+                    as: "userData",
                 }
             },
             {
@@ -32,7 +31,7 @@ exports.getAllRequests = async (req, res) => {
                 $project: {
                     _id: 0,
                     status: 1,
-                    request_date: 1, 
+                    request_date: 1,
                     "userFirstname": "$userData.firstname",
                     "userLastname": "$userData.lastname",
                     "materialType": "$materialData.type",
@@ -42,23 +41,27 @@ exports.getAllRequests = async (req, res) => {
         ]);
         res.json(requests);
     } catch (err) {
+        console.error('Erreur lors de la récupération des demandes :', err);
         res.status(500).send('Erreur lors de la récupération des demandes : ' + err);
     }
 };
 
 exports.getMyRequests = async (req, res) => {
     try {
+        const userId = new ObjectId(req.params.id);
+        console.log('userId:', userId);
+
         const requests = await Request.aggregate([
             {
                 $match: {
-                    user: {"$oid": '663b8bbb711b14a1cfc4084d' }
+                    user: userId
                 }
             },
-            {   
+            {
                 $lookup: {
                     from: "users",
                     localField: "user",
-                    foreignField: "_id", 
+                    foreignField: "_id",
                     as: "userData",
                 }
             },
@@ -71,18 +74,22 @@ exports.getMyRequests = async (req, res) => {
                 }
             },
             {
-                $unwind: "$userData",
-                preserveNullAndEmptyArrays: true
+                $unwind: {
+                    path: "$userData",
+                    preserveNullAndEmptyArrays: true
+                }
             },
             {
-                $unwind: "$materialData",
-                preserveNullAndEmptyArrays: true
+                $unwind: {
+                    path: "$materialData",
+                    preserveNullAndEmptyArrays: true
+                }
             },
             {
                 $project: {
                     _id: 0,
                     status: 1,
-                    request_date: 1, 
+                    request_date: 1,
                     "userFirstname": "$userData.firstname",
                     "userLastname": "$userData.lastname",
                     "materialType": "$materialData.type",
@@ -90,8 +97,10 @@ exports.getMyRequests = async (req, res) => {
                 }
             }
         ]);
+        console.log('Requests:', requests); // Ajout de logs pour vérifier les données renvoyées
         res.json(requests);
     } catch (err) {
+        console.error('Erreur lors de la récupération des demandes :', err);
         res.status(500).send('Erreur lors de la récupération des demandes : ' + err);
     }
 };
@@ -104,6 +113,7 @@ exports.createRequest = async (req, res) => {
         await newRequest.save();
         res.status(201).json(newRequest);
     } catch (err) {
+        console.error('Erreur lors de la création de la demande :', err);
         res.status(500).send("Erreur lors de la création de la demande : " + err);
     }
 };
