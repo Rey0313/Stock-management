@@ -17,4 +17,12 @@ export class StockService {
     getMaterialsList(): Observable<any[]> {
         return this.http.get<any[]>(this.apiUrl);
     }
+
+    addMaterial(material: any): Observable<any> {
+        return this.http.post<any>(this.apiUrl, material).pipe(
+          catchError((error) => {
+            throw "Erreur lors de l'ajout du matériel: " + error;
+          })
+        );
+    }
 }
