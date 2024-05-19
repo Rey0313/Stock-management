@@ -16,10 +16,12 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           if (response && response.token) {
+            const decodedToken = this.decodeToken(response.token);
             localStorage.setItem('currentUser', JSON.stringify({
               email,
               token: response.token,
-              role: this.decodeToken(response.token).role
+              userId: decodedToken.id, // Utilise 'id' au lieu de 'userId'
+              role: decodedToken.role
             }));
           }
           console.log('Local storage: ', localStorage.getItem('currentUser'));
@@ -47,6 +49,11 @@ export class AuthService {
     }).join(''));
 
     return JSON.parse(jsonPayload);
+  }
+
+  getUserId(): string {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return currentUser.userId;
   }
 
   getCurrentUser(): any {

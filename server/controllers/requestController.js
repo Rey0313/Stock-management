@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
 const Request = require('../models/Request');
 
 exports.getAllRequests = async (req, res) => {
@@ -48,8 +47,7 @@ exports.getAllRequests = async (req, res) => {
 
 exports.getMyRequests = async (req, res) => {
     try {
-        const userId = new ObjectId(req.params.id);
-        console.log('userId:', userId);
+        const userId = new mongoose.Types.ObjectId(req.params.id);
 
         const requests = await Request.aggregate([
             {
@@ -97,7 +95,6 @@ exports.getMyRequests = async (req, res) => {
                 }
             }
         ]);
-        console.log('Requests:', requests); // Ajout de logs pour vérifier les données renvoyées
         res.json(requests);
     } catch (err) {
         console.error('Erreur lors de la récupération des demandes :', err);

@@ -59,6 +59,6 @@ export const routes: Routes = [
         path: 'my-requests-list',
         component: MyRequestListComponent,
         canActivate: [canActivateRole],
-        data: { roles: 'membre' }
+        data: { roles: ['admin', 'membre'] }
     }
 ];

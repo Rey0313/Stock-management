@@ -1,34 +1,55 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { AuthService } from '../../authentication/services/auth.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class RequestsService {
 
-    private apiUrl = 'http://localhost:3000/api/requests';
-    private userId = '664229de20a6e06f920e9761'; 
+  private apiUrl = 'http://localhost:3000/api/requests';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-    getRequestsList(): Observable<any[]> {
-        return this.http.get<any[]>(this.apiUrl);
-    }
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
+    });
+  }
 
-    getMyRequestsList(): Observable<any[]> {
-        const userId = '664229de20a6e06f920e9761'; // Assure-toi de bien utiliser l'ID utilisateur correct ici
-        return this.http.get<any[]>(`${this.apiUrl}/${userId}`);
-      }
+  getRequestsList(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(this.apiUrl, { headers }).pipe(
+      catchError((error) => {
+        throw "Erreur lors de la récupération des demandes: " + error;
+      })
+    );
+  }
 
-    askAssigned(materialId: string): Observable<any[]>  {
-        const userId = '664229de20a6e06f920e9761';
-        return this.http.post<any>(this.apiUrl, {
-            user: userId,
-            material: materialId,
-            status: 'en_attente',
-            type: "attribution"
-        });
-    }
+  getMyRequestsList(): Observable<any[]> {
+    const headers = this.getHeaders();
+    const userId = this.authService.getUserId();
+    return this.http.get<any[]>(`${this.apiUrl}/${userId}`, { headers }).pipe(
+      catchError((error) => {
+        throw "Erreur lors de la récupération de mes demandes: " + error;
+      })
+    );
+  }
+
+  askAssigned(materialId: string): Observable<any[]> {
+    const headers = this.getHeaders();
+    const userId = this.authService.getUserId();
+    return this.http.post<any>(this.apiUrl, {
+      user: userId,
+      material: materialId,
+      status: 'en_attente',
+      type: "attribution"
+    }, { headers }).pipe(
+      catchError((error) => {
+        throw "Erreur lors de la demande d'attribution: " + error;
+      })
+    );
+  }
 }
