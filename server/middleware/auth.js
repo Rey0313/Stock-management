@@ -10,7 +10,8 @@ exports.generateToken = (user) => {
 };
 
 exports.verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'];
+  const header = req.headers['authorization'];
+  const token = header && header.split(' ')[1];
   if (!token) {
     return res.status(403).send('Un token est nécessaire pour l’authentification');
   }
@@ -21,4 +22,24 @@ exports.verifyToken = (req, res, next) => {
     return res.status(401).send('Token invalide');
   }
   return next();
+};
+
+exports.checkRole = (roles) => (req, res, next) => {
+  const userRole = req.user.role;
+  if (!roles.includes(userRole)) {
+    return res.status(403).send("Accès refusé");
+  }
+  next();
+};
+
+exports.checkUserOrAdmin = (req, res, next) => {
+  const userRole = req.user.role;
+  const userId = req.user._id;
+  const paramId = req.params.id;
+
+  if (userRole === 'admin' || userId === paramId) {
+    next();
+  } else {
+    res.status(403).send("Accès refusé");
+  }
 };

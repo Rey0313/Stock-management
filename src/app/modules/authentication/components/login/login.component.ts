@@ -19,11 +19,9 @@ export class LoginComponent {
     this.authService.login(this.mail, this.password).subscribe({
       next: (response) => {
         console.log('Logged in successfully', response);
-        // Redirige l'utilisateur ou affiche des infos
       },
       error: (error) => {
         console.error('Login failed', error);
-        // Gère les erreurs de connexion ici
       }
     });
   }
