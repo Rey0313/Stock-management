@@ -13,17 +13,23 @@ export class UserService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getUsers(): Observable<any[]> {
-    const headers = new HttpHeaders({
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
       Authorization: `Bearer ${this.authService.getToken()}`
     });
-    return this.http.get<any[]>(this.apiUrl, { headers });
+  }
+
+  getUsers(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(this.apiUrl, { headers }).pipe(
+      catchError((error) => {
+        throw 'Erreur lors de la récupération des utilisateurs: ' + error;
+      })
+    );
   }
 
   createUser(user: any): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
+    const headers = this.getHeaders();
     return this.http.post<any>(this.apiUrl, user, { headers }).pipe(
       catchError((error) => {
         throw 'Erreur lors de la création de l’utilisateur: ' + error;
@@ -32,7 +38,8 @@ export class UserService {
   }
 
   deleteUser(userId: any): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${userId}`).pipe(
+    const headers = this.getHeaders();
+    return this.http.delete<any>(`${this.apiUrl}/${userId}`, { headers }).pipe(
       catchError((error) => {
         throw 'Erreur lors de la suppression de l’utilisateur: ' + error;
       })
@@ -40,7 +47,8 @@ export class UserService {
   }
 
   updateUser(userId: string, user: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${user._id}`, user).pipe(
+    const headers = this.getHeaders();
+    return this.http.put<any>(`${this.apiUrl}/${userId}`, user, { headers }).pipe(
       catchError((error) => {
         throw 'Erreur lors de la mise à jour de l’utilisateur: ' + error;
       })
@@ -48,7 +56,8 @@ export class UserService {
   }
 
   getUserById(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${userId}`).pipe(
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${this.apiUrl}/${userId}`, { headers }).pipe(
       catchError((error) => {
         throw 'Erreur lors de la récupération de l’utilisateur: ' + error;
       })

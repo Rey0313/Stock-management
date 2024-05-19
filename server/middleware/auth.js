@@ -12,7 +12,6 @@ exports.generateToken = (user) => {
 exports.verifyToken = (req, res, next) => {
   const header = req.headers['authorization'];
   const token = header && header.split(' ')[1];
-  console.log(token);
   if (!token) {
     return res.status(403).send('Un token est nécessaire pour l’authentification');
   }

@@ -33,7 +33,7 @@ export const routes: Routes = [
         path: 'stock-list',
         component: StockListComponent,
         canActivate: [canActivateRole],
-        data: { roles: 'membre' }
+        data: { roles: 'admin' }
     },
     {
         path: 'update-user/:id',
