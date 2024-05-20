@@ -1,13 +1,22 @@
-<h1>Liste des demandes : </h1>
-
+<h1>Liste des demandes :</h1>
 <hr>
 <div *ngFor="let request of requests">
+    <p><strong>Type de la requete:</strong> {{ request.type }}</p>
     <p><strong>Nom de l'utilisateur:</strong> {{ request.userLastname }}</p>
     <p><strong>Prénom de l'utilisateur:</strong> {{ request.userFirstname }}</p>
     <p><strong>Date de la demande:</strong> {{ request.request_date | date: 'dd/MM/yyyy' }}</p>
     <p><strong>Statut de la demande:</strong> {{ request.status }}</p>
     <p><strong>Type de matériel:</strong> {{ request.materialType }}</p>
-    <p><strong>Nom du matériel:</strong> {{ request.materialName}}</p>
+    <p><strong>Nom du matériel:</strong> {{ request.materialName }}</p>
+    <div *ngIf="request.status === 'en_attente'">
+        <div *ngIf="request.type === 'attribution'; else attributionBlock">
+            <button (click)="acceptAssign(request._id)">Accepter</button>
+            <button (click)="rejectAssign(request._id)">Refuser</button>
+        </div>
+        <ng-template #attributionBlock>
+            <button (click)="acceptReturn(request._id)">Accepter</button>
+            <button (click)="rejectReturn(request._id)">Refuser</button>
+        </ng-template>
+    </div>
     <hr>
-  </div>
-  
+</div>

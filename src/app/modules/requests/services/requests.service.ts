@@ -52,4 +52,40 @@ export class RequestsService {
       })
     );
   }
+
+  acceptAssign(requestId: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.apiUrl}/acceptAssign`, { requestId }, { headers }).pipe(
+        catchError((error) => {
+            throw "Erreur lors de l'acceptation de la demande: " + error;
+        })
+    );
+  }
+
+  rejectAssign(requestId: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.apiUrl}/rejectAssign`, { requestId }, { headers }).pipe(
+        catchError((error) => {
+            throw "Erreur lors du refus de la demande: " + error;
+        })
+    );
+  }
+
+  acceptReturn(requestId: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.apiUrl}/acceptReturn`, { requestId }, { headers }).pipe(
+        catchError((error) => {
+            throw "Erreur lors de l'acceptation du retour: " + error;
+        })
+    );
+  }
+
+  rejectReturn(requestId: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.apiUrl}/rejectReturn`, { requestId }, { headers }).pipe(
+        catchError((error) => {
+            throw "Erreur lors du refus du retour: " + error;
+        })
+    );
+  }
 }
