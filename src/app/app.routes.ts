@@ -8,6 +8,7 @@ import { StockListComponent } from './modules/stock/components/stock-list/stock-
 import { AddMaterialsComponent } from './modules/stock/components/add-materials/add-materials.component';
 import { RequestListComponent } from './modules/requests/components/request-list/request-list.component';
 import { MyRequestListComponent } from './modules/requests/components/my-request-list/my-request-list.component';
+import { AssignedMaterialsComponent } from './modules/materials/components/assigned-materials/assigned-materials.component';
 
 export const routes: Routes = [
     {
@@ -60,5 +61,11 @@ export const routes: Routes = [
         component: MyRequestListComponent,
         canActivate: [canActivateRole],
         data: { roles: ['admin', 'membre'] }
+    },
+    {
+        path: 'assigned-materials',
+        component: AssignedMaterialsComponent,
+        canActivate: [canActivateRole],
+        data: { roles: 'admin' }
     }
 ];

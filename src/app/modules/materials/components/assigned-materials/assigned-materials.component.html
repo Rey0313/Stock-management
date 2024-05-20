@@ -1,0 +1,15 @@
+<h1>Liste des matériels assignés :</h1>
+<hr>
+<div *ngFor="let type of (groupedAssignedMaterials | keyvalue)">
+  <h2>{{ type.key }}</h2>
+  <ul>
+    <li *ngFor="let material of type.value">
+      <p><strong>Nom du matériel:</strong> {{ material.name ? material.name : 'Nom non disponible' }}</p>
+      <p><strong>Pièce:</strong> {{ material.room ? material.room : 'Pièce non disponible' }}</p>
+      <p><strong>Date d'assignation:</strong> {{ material.assignment_date | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Date de retour prévue:</strong> {{ material.planned_return_date | date: 'dd/MM/yyyy' }}</p>
+      <button (click)="askReturn(material._id)">Demande de retour</button>
+      <hr>
+    </li>
+  </ul>
+</div>

@@ -1,11 +1,9 @@
 <h1>Liste des demandes :</h1>
 <hr>
 <div *ngFor="let request of requests">
-  <p><strong>Nom de l'utilisateur:</strong> {{ request.userLastname }}</p>
-  <p><strong>Prénom de l'utilisateur:</strong> {{ request.userFirstname }}</p>
-  <p><strong>Date de la demande:</strong> {{ request.request_date | date: 'dd/MM/yyyy' }}</p>
-  <p><strong>Statut de la demande:</strong> {{ request.status }}</p>
   <p><strong>Type de matériel:</strong> {{ request.materialType }}</p>
   <p><strong>Nom du matériel:</strong> {{ request.materialName }}</p>
+  <p><strong>Date de la demande:</strong> {{ request.request_date | date: 'dd/MM/yyyy' }}</p>
+  <p><strong>Statut de la demande:</strong> {{ request.status }}</p>
   <hr>
 </div>

@@ -36,7 +36,7 @@ export class StockListComponent {
 
     private groupMaterialsByType() {
         this.groupedMaterials = this.materialsList.reduce((acc, material) => {
-            const type = material.type || 'Unknown'; // Use 'name' if it's supposed to be 'name'
+            const type = material.type || 'Unknown'; 
             if (!acc[type]) {
                 acc[type] = [];
             }
