@@ -11,11 +11,7 @@ import { MyRequestListComponent } from './modules/requests/components/my-request
 import { AssignedMaterialsComponent } from './modules/materials/components/assigned-materials/assigned-materials.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
-    },
+
     {
         path: 'login',
         component: LoginComponent
