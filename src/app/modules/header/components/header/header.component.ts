@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AuthService } from '../../../authentication/services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -35,7 +38,7 @@ export class HeaderComponent {
   isScrolled = false;
   isCollapsed = true;
 
-  constructor(library: FaIconLibrary) {
+  constructor(library: FaIconLibrary, private authService: AuthService, private router: Router) {
     library.addIcons(faBars, faTimes);
   }
 
@@ -51,5 +54,16 @@ export class HeaderComponent {
     } else {
       document.body.style.overflow = 'auto';
     }
+  }
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+  logout() {
+    this.authService.logout();
+    if(!this.isCollapsed) {
+      this.isCollapsed = !this.isCollapsed;
+    }
+    this.router.navigate(['/']);
+    
   }
 }

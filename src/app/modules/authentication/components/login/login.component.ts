@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,15 @@ export class LoginComponent {
     this.authService.login(this.mail, this.password).subscribe({
       next: (response) => {
         console.log('Logged in successfully', response);
+        // en francais
+        swal({
+          title: 'Connexion réussie',
+          text: 'Vous êtes maintenant connecté',
+          icon: 'success',
+        }).then(() => {
+          window.location.href = 'dashboard';
+        
+        })
       },
       error: (error) => {
         console.error('Login failed', error);

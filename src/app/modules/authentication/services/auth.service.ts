@@ -63,4 +63,9 @@ export class AuthService {
     }
     return null;
   }
+
+  isAuthenticated(): boolean {
+    const currentUser = this.getCurrentUser();
+    return !!currentUser;
+  }
 }

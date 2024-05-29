@@ -9,12 +9,19 @@ import { AddMaterialsComponent } from './modules/stock/components/add-materials/
 import { RequestListComponent } from './modules/requests/components/request-list/request-list.component';
 import { MyRequestListComponent } from './modules/requests/components/my-request-list/my-request-list.component';
 import { AssignedMaterialsComponent } from './modules/materials/components/assigned-materials/assigned-materials.component';
+import { DashboardComponent } from './modules/dashboard/components/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [canActivateRole],
+        data: { roles: ['admin', 'membre'] }
     },
     {
         path: 'users',
