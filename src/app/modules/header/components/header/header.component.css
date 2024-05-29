@@ -44,33 +44,43 @@
 }
 
 .collapse.navbar-collapse {
-    position: absolute;
+    position: fixed;
     top: 80px;
     width: 100%;
     z-index: 999;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow-y: auto;
+    display: block;
+    height: calc(100vh - 80px);
 }
 .collapse.navbar-collapse.show {
     opacity: 1;
     transform: translateY(0);
+    visibility: visible;
 }
 .collapse.navbar-collapse.hide {
     opacity: 0;
     transform: translateY(-20px);
+    visibility: hidden;
 }
 .navbar-nav {
     width: 100%;
     background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .navbar-nav .nav-item {
     width: 100%;
-    text-align: center;
+    text-align: left;
+    flex-grow: 1;
+    padding-left:50px;
+}
+.navbar-nav .nav-item:first-child {
+    padding-top: 20px;
 }
 .navbar-nav .nav-link {
-    font-size: 24px;
-    padding: 20px;
+    font-size: 20px;
+    font-weight: 500;
 }
 @media (max-width: 992px) {
     .navbar {

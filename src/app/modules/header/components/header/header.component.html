@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" [ngClass]="{'scrolled': isScrolled}">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="assets/logo.png" alt="Logo" class="navbar-logo">
+        <img src="/assets/logo.png" alt="Logo" class="navbar-logo">
       </a>
       <button class="navbar-toggler" type="button" (click)="toggleMenu()" [attr.aria-expanded]="!isCollapsed">
         <fa-icon [icon]="isCollapsed ? 'bars' : 'times'" class="animated-icon"></fa-icon>
@@ -10,7 +10,7 @@
     </div>
   </nav>
 </header>
-<div class="collapse navbar-collapse" [ngClass]="{'show': !isCollapsed, 'hide': isCollapsed}" id="navbarNav">
+<div class="collapse navbar-collapse" [@openClose]="isCollapsed ? 'closed' : 'open'" id="navbarNav">
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" href="#">Formation</a>
@@ -28,7 +28,7 @@
       <a class="nav-link" href="#">International</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">L'UPJV</a>
+      <a class="nav-link" href="/login">Connexion</a>
     </li>
   </ul>
 </div>

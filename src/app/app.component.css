@@ -1,5 +1,13 @@
+/* import poppins and verdana */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Verdana&display=swap');
+
+*{
+    font-family: 'Poppins', 'Verdana', sans-serif;
+
+}
 .main-content {
     padding-top: 80px;
-    height:200vh;
     background-color: #e8eef9;
+    min-height: 100vh;
 }
