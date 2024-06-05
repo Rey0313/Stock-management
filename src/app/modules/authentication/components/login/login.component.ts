@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';  // Importer le service Router
 import swal from 'sweetalert';
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent {
   mail: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}  // Injecter le service Router
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -29,7 +30,7 @@ export class LoginComponent {
           text: 'Vous êtes maintenant connecté',
           icon: 'success',
         }).then(() => {
-          window.location.href = 'dashboard';
+          this.router.navigate(['/dashboard']); 
         });
       },
       error: (error) => {

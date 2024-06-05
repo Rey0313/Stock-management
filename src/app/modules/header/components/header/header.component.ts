@@ -5,12 +5,13 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthService } from '../../../authentication/services/auth.service';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   animations: [
@@ -55,9 +56,16 @@ export class HeaderComponent {
       document.body.style.overflow = 'auto';
     }
   }
+  
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
+
+  closeMenu() {
+    this.isCollapsed = true;
+    document.body.style.overflow = 'auto';
+  }
+
   logout() {
     this.authService.logout();
     if(!this.isCollapsed) {
