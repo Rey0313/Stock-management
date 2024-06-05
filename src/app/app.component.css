@@ -9,5 +9,5 @@
 .main-content {
     padding-top: 80px;
     background-color: #e8eef9;
-    min-height: 100vh;
+    min-height: calc(100vh);
 }

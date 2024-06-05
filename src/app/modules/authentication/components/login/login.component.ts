@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormsModule } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   mail: string = '';
@@ -16,22 +17,27 @@ export class LoginComponent {
 
   constructor(private authService: AuthService) {}
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
     this.authService.login(this.mail, this.password).subscribe({
       next: (response) => {
-        console.log('Logged in successfully', response);
-        // en francais
         swal({
           title: 'Connexion réussie',
           text: 'Vous êtes maintenant connecté',
           icon: 'success',
         }).then(() => {
           window.location.href = 'dashboard';
-        
-        })
+        });
       },
       error: (error) => {
-        console.error('Login failed', error);
+        swal({
+          title: 'Erreur',
+          text: 'Identifiants incorrects',
+          icon: 'error',
+        });
       }
     });
   }

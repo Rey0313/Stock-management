@@ -1,10 +1,16 @@
-<form (submit)="onSubmit()" class="p-4 border rounded shadow-sm bg-white" style="max-width: 400px; margin: auto;">
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="p-4 border rounded shadow-sm bg-white" style="max-width: 400px; margin: auto;">
   <h2 class="text-center mb-4">Login</h2>
   <div class="mb-3">
     <input type="email" [(ngModel)]="mail" name="mail" class="form-control" placeholder="Email" required>
+    <div *ngIf="loginForm.submitted && !mail" class="text-danger">
+      L'email est requis.
+    </div>
   </div>
   <div class="mb-3">
     <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Password" required>
+    <div *ngIf="loginForm.submitted && !password" class="text-danger">
+      Le mot de passe est requis.
+    </div>
   </div>
   <button type="submit" class="btn btn-primary btn-block w-100">Login</button>
 </form>

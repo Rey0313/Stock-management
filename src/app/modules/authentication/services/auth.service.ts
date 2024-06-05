@@ -20,11 +20,10 @@ export class AuthService {
             localStorage.setItem('currentUser', JSON.stringify({
               email,
               token: response.token,
-              userId: decodedToken.id, // Utilise 'id' au lieu de 'userId'
+              userId: decodedToken.id,
               role: decodedToken.role
             }));
           }
-          console.log('Local storage: ', localStorage.getItem('currentUser'));
           return response;
         })
       );
