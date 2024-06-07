@@ -2,18 +2,37 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialsService } from '../../services/materials.service';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-assigned-materials',
   standalone: true,
-  imports: [ CommonModule, HttpClientModule ],
+  imports: [ CommonModule, HttpClientModule, FontAwesomeModule ],
   templateUrl: './assigned-materials.component.html',
-  styleUrl: './assigned-materials.component.css'
+  styleUrls: ['./assigned-materials.component.css'],
+  animations: [
+    trigger('flipState', [
+      state('active', style({
+        transform: 'rotateY(180deg)'
+      })),
+      state('inactive', style({
+        transform: 'rotateY(0)'
+      })),
+      transition('active => inactive', animate('600ms ease-out')),
+      transition('inactive => active', animate('600ms ease-in'))
+    ])
+  ]
 })
 export class AssignedMaterialsComponent {
   groupedAssignedMaterials: { [type: string]: any[] } = {};
+  flip: string = 'inactive';
 
-  constructor(private materialService: MaterialsService) { }
+  constructor(private materialService: MaterialsService, private library: FaIconLibrary, private router: Router) {
+    library.addIcons(faArrowLeft);
+  }
 
   ngOnInit(): void {
     this.materialService.getAssignedMaterials()
@@ -42,4 +61,11 @@ export class AssignedMaterialsComponent {
       });
   }
 
+  goBack() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  toggleFlip() {
+    this.flip = (this.flip === 'inactive') ? 'active' : 'inactive';
+  }
 }

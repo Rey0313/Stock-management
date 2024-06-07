@@ -3,13 +3,13 @@
         <main class="">
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1>Dashboard</h1>
+                <h1>Tableau de bord</h1>
             </div>
 
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="assets/img/equipment.jpg" class="card-img-top" alt="Equipment">
+                        <img src="assets/img/equipment.jpg" class="card-img-top" alt="Liste du matériels image">
                         <div class="card-body">
                             <p class="card-text">Matériels</p>
                             <a [routerLink]="['/stock-list']" class="btn btn-primary">Visiter</a>
@@ -18,19 +18,19 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="assets/img/furniture.jpg" class="card-img-top" alt="Furniture">
+                        <img src="assets/img/my-request-list.jpg" class="card-img-top" alt="Mes requêtes image">
                         <div class="card-body">
-                            <p class="card-text">Furniture</p>
-                            <a href="#" class="btn btn-primary">Go</a>
+                            <p class="card-text">Mes requêtes</p>
+                            <a [routerLink]="['/my-requests-list']" class="btn btn-primary">Visiter</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="assets/img/printer.jpg" class="card-img-top" alt="Printer">
+                        <img src="assets/img/assigned-materials.jpg" class="card-img-top" alt="Matériels assignés image">
                         <div class="card-body">
-                            <p class="card-text">Printer</p>
-                            <a href="#" class="btn btn-primary">Go</a>
+                            <p class="card-text">Matériels assignés</p>
+                            <a [routerLink]="['/assigned-materials']" class="btn btn-primary">Visiter</a>
                         </div>
                     </div>
                 </div>
