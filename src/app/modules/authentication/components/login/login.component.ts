@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';  // Importer le service Router
+import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,9 @@ export class LoginComponent {
   mail: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}  // Injecter le service Router
+  constructor(private authService: AuthService, private router: Router, private titleService: Title) {
+    this.titleService.setTitle("Connexion - Material Manageur");
+  }
 
   onSubmit(form: NgForm) {
     if (form.invalid) {

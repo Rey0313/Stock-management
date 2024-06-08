@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../authentication/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,9 @@ export class StockService {
 
     private apiUrl = 'http://localhost:3000/api/materials';
 
-    constructor(private http: HttpClient, private authService: AuthService) { }
+    constructor(private http: HttpClient, private authService: AuthService, private titleService: Title) {
+      this.titleService.setTitle("Stock - Material Manageur");
+    }
 
     private getHeaders(): HttpHeaders {
       return new HttpHeaders({

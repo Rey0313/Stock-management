@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -14,26 +14,14 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     imports: [CommonModule, HttpClientModule, FontAwesomeModule],
     templateUrl: './my-request-list.component.html',
     styleUrl: './my-request-list.component.css',
-    animations: [
-        trigger('flipState', [
-          state('active', style({
-            transform: 'rotateY(180deg)'
-          })),
-          state('inactive', style({
-            transform: 'rotateY(0)'
-          })),
-          transition('active => inactive', animate('600ms ease-out')),
-          transition('inactive => active', animate('600ms ease-in'))
-        ])
-      ]
 })
 
 export class MyRequestListComponent {
     requests: any[] = [];
-    flip: string = 'inactive';
 
-    constructor(private requestService: RequestsService, private library: FaIconLibrary, private router: Router) {
+    constructor(private requestService: RequestsService, private library: FaIconLibrary, private router: Router, private titleService: Title) {
         library.addIcons(faArrowLeft);
+        this.titleService.setTitle("Mes demandes - Material Manageur");
     }
 
     ngOnInit(): void {
@@ -46,9 +34,5 @@ export class MyRequestListComponent {
 
     goBack() {
         this.router.navigate(['/dashboard']);
-      }
-    
-      toggleFlip() {
-        this.flip = (this.flip === 'inactive') ? 'active' : 'inactive';
       }
 }

@@ -1,7 +1,36 @@
-<ul>
-    <li *ngFor="let user of users">
-      {{ user.role + ' :' + (user.lastname ? user.lastname + ' ' + user.firstname : user.organisation_name) }}
-      <button (click)="deleteUser(user._id)">Supprimer</button>
-      <button (click)="updateUser(user._id)">Modifier</button>
-    </li>
-  </ul>
+  <div class="container-fluid">
+    <div class="row">
+      <main class="col-12">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <div class="d-flex align-items-center">
+            <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+            <h1 class="h2 ms-2">Liste des utilisateurs</h1>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-12">
+          </div>
+          <div class="col-md-4 mb-4" *ngFor="let user of users">
+            <div class="card-container">
+              <div class="card">
+                <div class="card-front">
+                  <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                    <span class="card-text text-uppercase upper-subtitle">{{ user.role }}</span>
+                    <p class="card-text text-capitalize fw-bold text-center">{{ user.lastname ? user.lastname + ' ' + user.firstname : user.organisation_name }}</p>
+                  </div>
+                </div>
+                <div class="card-back">
+                  <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                    <button class="btn btn-warning mb-2 mt-3" (click)="updateUser(user._id)">Modifier</button>
+                    <button class="btn btn-danger" (click)="deleteUser(user._id)">Supprimer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
