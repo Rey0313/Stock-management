@@ -4,6 +4,7 @@
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1>Tableau de bord</h1>
+                <a *ngIf="isAdmin" [routerLink]="['/dashboard-admin']" class="btn btn-dark">Admin</a>
             </div>
 
             <div class="row">
@@ -27,7 +28,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="assets/img/assigned-materials.jpg" class="card-img-top" alt="Matériels assignés image">
+                        <img src="assets/img/assigned-materials.jpg" class="card-img-top"
+                            alt="Matériels assignés image">
                         <div class="card-body">
                             <p class="card-text">Matériels assignés</p>
                             <a [routerLink]="['/assigned-materials']" class="btn btn-primary">Visiter</a>

@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <main class="">
+            <div
+                class="d-flex align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+                <h1>Tableau de bord <span class="text-danger">Admin</span></h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="assets/img/users.jpg" class="card-img-top" alt="Utilisateurs image">
+                        <div class="card-body">
+                            <p class="card-text">Utilisateurs</p>
+                            <a [routerLink]="['/users']" class="btn btn-primary">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="assets/img/" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <p class="card-text">Lorem ipsum</p>
+                            <a [routerLink]="['/']" class="btn btn-primary">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="assets/img/" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <p class="card-text">Lorem ipsum</p>
+                            <a [routerLink]="['/']" class="btn btn-primary">Visiter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

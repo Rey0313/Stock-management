@@ -42,6 +42,6 @@ export class UserListComponent {
   }
 
   goBack() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard-admin']);
   }
 }

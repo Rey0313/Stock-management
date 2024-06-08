@@ -10,6 +10,7 @@ import { RequestListComponent } from './modules/requests/components/request-list
 import { MyRequestListComponent } from './modules/requests/components/my-request-list/my-request-list.component';
 import { AssignedMaterialsComponent } from './modules/materials/components/assigned-materials/assigned-materials.component';
 import { DashboardComponent } from './modules/dashboard/components/dashboard/dashboard.component';
+import { DashboardAdminComponent } from './modules/dashboard-admin/dashboard-admin.component';
 
 export const routes: Routes = [
 
@@ -22,6 +23,12 @@ export const routes: Routes = [
         component: DashboardComponent,
         canActivate: [canActivateRole],
         data: { roles: ['admin', 'membre'] }
+    },
+    {
+        path: 'dashboard-admin',
+        component: DashboardAdminComponent,
+        canActivate: [canActivateRole],
+        data: { roles: ['admin'] }
     },
     {
         path: 'users',
