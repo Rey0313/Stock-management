@@ -31,7 +31,11 @@ export class UpdateUserComponent implements OnInit {
     private titleService: Title
   ) {
     library.addIcons(faArrowLeft);
+    if (this.currentUserRole === 'admin') {
     this.titleService.setTitle('Modifier un utilisateur - Material Manageur');
+    }else{
+    this.titleService.setTitle('Modifier mon profil - Material Manageur');
+    }
   }
 
   ngOnInit() {

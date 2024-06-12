@@ -5,7 +5,8 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="d-flex align-items-center">
           <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
-          <h1 class="h2 ms-2">Liste des utilisateurs</h1>
+          <h1 class="h2 ms-2">{{ currentUserRole === 'admin' ? 'Mettre à jour l\'utilisateur' : 'Mettre à jour mon profil' }}
+          </h1>
         </div>
       </div>
       <div class="col-lg-7 mx-auto">
