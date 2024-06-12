@@ -1,4 +1,6 @@
 var User = require('../models/User');
+const auth = require('../middleware/auth');
+const bcrypt = require('bcrypt');
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -43,16 +45,31 @@ exports.deleteUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (updatedUser) {
-            res.json(updatedUser);
-        } else {
-            res.status(404).send("Utilisateur non trouvé");
-        }
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!updatedUser) {
+        return res.status(404).send("Utilisateur non trouvé");
+      }
+  
+      const newToken = auth.generateToken(updatedUser);
+      res.status(200).json({ user: updatedUser, token: newToken });
     } catch (err) {
-        res.status(500).send('Erreur lors de la mise à jour de l’utilisateur : ' + err);
+      res.status(500).send('Erreur lors de la mise à jour de l’utilisateur : ' + err.message);
     }
-};
+  };
+  
+  exports.updateUserPassword = async (req, res) => {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, { password: hashedPassword }, { new: true });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "Utilisateur non trouvé" });
+      }
+  
+      res.status(200).json({ message: "Mot de passe mis à jour avec succès" });
+    } catch (err) {
+      res.status(500).json({ message: 'Erreur lors de la mise à jour du mot de passe', error: err.message });
+    }
+  };
 
 exports.getUserById = async (req, res) => {
     try {

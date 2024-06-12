@@ -63,4 +63,14 @@ export class UserService {
       })
     );
   }
+
+  updateUserPassword(userId: string, password: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.put<any>(`${this.apiUrl}/${userId}/password`, { password }, { headers }).pipe(
+      catchError((error) => {
+        return throwError(() => new Error(error.error?.message || 'Erreur lors de la mise à jour du mot de passe'));
+      })
+    );
+  }
+
 }
