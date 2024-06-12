@@ -13,10 +13,15 @@ import { DashboardComponent } from './modules/dashboard/components/dashboard/das
 import { DashboardAdminComponent } from './modules/dashboard-admin/dashboard-admin.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+    },
 
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
     },
     {
         path: 'dashboard',

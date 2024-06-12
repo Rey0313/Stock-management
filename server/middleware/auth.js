@@ -5,7 +5,7 @@ exports.generateToken = (user) => {
   return jwt.sign(
     { id: user._id, email: user.mail, role: user.role },
     process.env.JWT_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: '72h' }
   );
 };
 
@@ -27,7 +27,7 @@ exports.verifyToken = (req, res, next) => {
 exports.checkRole = (roles) => (req, res, next) => {
   const userRole = req.user.role;
   if (!roles.includes(userRole)) {
-    return res.status(403).send("Accès refusé");
+    res.status(403).json({ message: "Accès refusé" });
   }
   next();
 };

@@ -5,11 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import swal from 'sweetalert';
 import { AuthService } from '../../../authentication/services/auth.service';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-update-user',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule],
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css']
 })
@@ -23,8 +26,13 @@ export class UpdateUserComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private library: FaIconLibrary,
+    private titleService: Title
+  ) {
+    library.addIcons(faArrowLeft);
+    this.titleService.setTitle('Modifier un utilisateur - Material Manageur');
+  }
 
   ngOnInit() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -107,6 +115,14 @@ export class UpdateUserComponent implements OnInit {
       currentUser.role = this.user.role;
       currentUser.token = newToken;
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    }
+  }
+
+  goBack() {
+    if (this.currentUserRole === 'admin') {
+      this.router.navigate(['/users']);
+    } else {
+      this.router.navigate(['/dashboard']);
     }
   }
 }
