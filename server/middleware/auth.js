@@ -34,12 +34,12 @@ exports.checkRole = (roles) => (req, res, next) => {
 
 exports.checkUserOrAdmin = (req, res, next) => {
   const userRole = req.user.role;
-  const userId = req.user._id;
+  const userId = req.user.id;
   const paramId = req.params.id;
 
   if (userRole === 'admin' || userId === paramId) {
     next();
   } else {
-    res.status(403).send("Accès refusé");
+    res.status(403).json({ message: "Accès refusé" });
   }
 };

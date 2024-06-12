@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../authentication/services/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'  
 })
 export class UserService {
 
@@ -59,7 +59,7 @@ export class UserService {
     const headers = this.getHeaders();
     return this.http.get<any>(`${this.apiUrl}/${userId}`, { headers }).pipe(
       catchError((error) => {
-        throw 'Erreur lors de la récupération de l’utilisateur: ' + error;
+        return throwError(() => new Error('Erreur lors de la récupération de l’utilisateur: ' + error.message));
       })
     );
   }

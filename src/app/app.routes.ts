@@ -52,7 +52,7 @@ export const routes: Routes = [
         path: 'update-user/:id',
         component: UpdateUserComponent,
         canActivate: [canActivateRole],
-        data: { roles: 'membre' }
+        data: { roles: ['admin', 'membre'] }
     },
     {
         path: 'add-material',

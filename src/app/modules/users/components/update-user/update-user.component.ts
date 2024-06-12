@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-update-user',
@@ -28,10 +29,19 @@ export class UpdateUserComponent implements OnInit {
         next: (userData) => {
           this.user = userData;
         },
-        error: (error) => console.error('Erreur lors de la récupération de l’utilisateur:', error)
+        error: (error) => {
+          const errorMessage = error.message || '';
+          if (errorMessage.includes('403')) {
+            this.router.navigate(['/dashboard']);
+            swal('Accès refusé', 'Vous n’avez pas les droits pour accéder à cette page.', 'error');
+          } else {
+            console.error('Erreur lors de la récupération de l’utilisateur:', error);
+          }
+        }
       });
     }
   }
+  
 
   onSubmit() {
     this.userService.updateUser(this.user._id, this.user).subscribe({
