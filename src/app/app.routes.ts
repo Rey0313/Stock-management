@@ -28,7 +28,7 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         canActivate: [canActivateRole],
-        data: { roles: ['admin', 'membre'] }
+        data: { roles: ['admin', 'membre', 'organisme'] }
     },
     {
         path: 'dashboard-admin',
@@ -40,25 +40,23 @@ export const routes: Routes = [
         path: 'users',
         component: UserListComponent,
         canActivate: [canActivateRole],
-        data: { roles: ['admin', 'membre'] }
+        data: { roles: ['admin', 'membre', 'organisme'] }
     },
     {
         path: 'create-user',
         component: CreateUserComponent,
-        canActivate: [canActivateRole],
-        data: { roles: ['admin'] }
     },
     {
         path: 'stock-list',
         component: StockListComponent,
         canActivate: [canActivateRole],
-        data: { roles: ['admin', 'membre'] }
+        data: { roles: ['admin', 'membre', 'organisme'] }
     },
     {
         path: 'update-user/:id',
         component: UpdateUserComponent,
         canActivate: [canActivateRole],
-        data: { roles: ['admin', 'membre'] }
+        data: { roles: ['admin', 'membre', 'organisme'] }
     },
     {
         path: 'add-material',
@@ -76,13 +74,13 @@ export const routes: Routes = [
         path: 'my-requests-list',
         component: MyRequestListComponent,
         canActivate: [canActivateRole],
-        data: { roles: ['admin', 'membre'] }
+        data: { roles: ['admin', 'membre', 'organisme'] }
     },
     {
         path: 'assigned-materials',
         component: AssignedMaterialsComponent,
         canActivate: [canActivateRole],
-        data: { roles: ['admin', 'membre'] }
+        data: { roles: ['admin', 'membre', 'organisme'] }
     },{
         path: 'notifications',
         component: NotificationsComponent,

@@ -1,0 +1,21 @@
+.container {
+    max-width: 800px;
+  }
+  
+  .card-header {
+    background-color: #007bff;
+  }
+  
+  .card-title {
+    margin-bottom: 0;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  

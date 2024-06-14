@@ -1,20 +1,53 @@
-<form (ngSubmit)="onSubmit(form)" #form="ngForm">
-  <select name="role" ngModel (ngModelChange)="onRoleChange($event)" required>
-    <option value="" disabled>Sélectionner un rôle</option>
-    <option value="membre">Membre</option>
-    <option value="organisme">Organisme</option>
-  </select>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="d-flex justify-content-left align-items-center mb-3">
+        <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+        <h3 class="ms-2">Créer un nouvel utilisateur</h3>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div class="form-group mb-3">
+              <label for="role" class="form-label">Rôle</label>
+              <select id="role" name="role" class="form-select" ngModel (ngModelChange)="onRoleChange($event)" required>
+                <option value="" disabled selected>Sélectionner un rôle</option>
+                <option value="membre">Membre</option>
+                <option value="organisme">Organisme</option>
+              </select>
+            </div>
 
-  <div *ngIf="role === 'membre'">
-    <input type="text" name="firstname" ngModel required placeholder="Prénom">
-    <input type="text" name="lastname" ngModel required placeholder="Nom">
+            <div *ngIf="role === 'membre'">
+              <div class="form-group mb-3">
+                <label for="firstname" class="form-label">Prénom</label>
+                <input id="firstname" type="text" name="firstname" class="form-control" ngModel required placeholder="Prénom">
+              </div>
+              <div class="form-group mb-3">
+                <label for="lastname" class="form-label">Nom</label>
+                <input id="lastname" type="text" name="lastname" class="form-control" ngModel required placeholder="Nom">
+              </div>
+            </div>
+
+            <div *ngIf="role === 'organisme'">
+              <div class="form-group mb-3">
+                <label for="organisation_name" class="form-label">Nom de l'Organisme</label>
+                <input id="organisation_name" type="text" name="organisation_name" class="form-control" ngModel required placeholder="Nom de l'Organisme">
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="mail" class="form-label">Email</label>
+              <input id="mail" type="email" name="mail" class="form-control" ngModel required placeholder="Email">
+            </div>
+            <div class="form-group mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input id="password" type="password" name="password" class="form-control" ngModel required placeholder="Mot de passe">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Créer utilisateur</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div *ngIf="role === 'organisme'">
-    <input type="text" name="organisation_name" ngModel required placeholder="Nom de l'Organisme">
-  </div>
-
-  <input type="email" name="mail" ngModel required placeholder="Email">
-  <input type="password" name="password" ngModel required placeholder="Mot de passe">
-  <button type="submit">Créer utilisateur</button>
-</form>
+</div>
