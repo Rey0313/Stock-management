@@ -1,34 +1,81 @@
-<form (ngSubmit)="onSubmit()" #updateForm="ngForm">
-  <div *ngIf="currentUserRole === 'admin'">
-    <select name="role" [(ngModel)]="user.role" required>
-      <option value="admin">Admin</option>
-      <option value="organisme">Organisme</option>
-      <option value="membre">Membre</option>
-    </select>
+<div class="container-fluid">
+  <div class="row">
+    <main class="col-12">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="d-flex align-items-center">
+          <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+          <h1 class="h2 ms-2">{{ currentUserRole === 'admin' ? 'Mettre à jour l\'utilisateur' : 'Mettre à jour mon profil' }}
+          </h1>
+        </div>
+      </div>
+      <div class="col-lg-7 mx-auto">
+        <div class="bg-white rounded-lg shadow-sm p-5">
+          <div class="tab-content">
+            <div class="tab-pane fade show active">
+              <form (ngSubmit)="onSubmit()" #updateForm="ngForm">
+                <div *ngIf="currentUserRole === 'admin'">
+                  <select name="role" [(ngModel)]="user.role" required class="form-control mb-3">
+                    <option value="admin">Admin</option>
+                    <option value="organisme">Organisme</option>
+                    <option value="membre">Membre</option>
+                  </select>
+                </div>
+
+                <ng-container
+                  *ngIf="user.role === 'organisme' || user.role === 'membre' || (currentUserRole === 'admin' && user.role === 'admin')">
+                  <div *ngIf="user.role !== 'organisme'" class="row mb-3">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" name="firstname" [(ngModel)]="user.firstname" required placeholder="Prénom"
+                          class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="lastname">Nom</label>
+                        <input type="text" name="lastname" [(ngModel)]="user.lastname" required placeholder="Nom"
+                          class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="mail">Email</label>
+                    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email"
+                      class="form-control">
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="user.role === 'organisme'">
+                  <div class="form-group mb-3">
+                    <label for="organisation_name">Nom de l'organisation</label>
+                    <input type="text" name="organisation_name" [(ngModel)]="user.organisation_name" required
+                      placeholder="Nom de l'organisation" class="form-control">
+                  </div>
+                </ng-container>
+
+                <button type="submit" class="btn btn-primary btn-block rounded-pill shadow-sm">Mettre à jour</button>
+              </form>
+
+              <form (ngSubmit)="onPasswordChange()" #passwordForm="ngForm" class="mt-4">
+                <div class="form-group mb-3">
+                  <label for="password">Nouveau mot de passe</label>
+                  <input type="password" name="password" [(ngModel)]="password" required
+                    placeholder="Nouveau mot de passe" class="form-control">
+                </div>
+                <div class="form-group mb-3">
+                  <label for="confirmPassword">Confirmer le mot de passe</label>
+                  <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required
+                    placeholder="Confirmer le mot de passe" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block rounded-pill shadow-sm">Modifier le mot de
+                  passe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
-
-  <div *ngIf="user.role === 'organisme'">
-    <input type="text" name="organisation_name" [(ngModel)]="user.organisation_name" required placeholder="Nom de l'organisation">
-    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email">
-  </div>
-
-  <div *ngIf="user.role === 'membre'">
-    <input type="text" name="firstname" [(ngModel)]="user.firstname" required placeholder="Prénom">
-    <input type="text" name="lastname" [(ngModel)]="user.lastname" required placeholder="Nom">
-    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email">
-  </div>
-
-  <div *ngIf="currentUserRole === 'admin' && user.role === 'admin'">
-    <input type="text" name="firstname" [(ngModel)]="user.firstname" required placeholder="Prénom">
-    <input type="text" name="lastname" [(ngModel)]="user.lastname" required placeholder="Nom">
-    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email">
-  </div>
-
-  <button type="submit">Mettre à jour</button>
-</form>
-
-<form (ngSubmit)="onPasswordChange()" #passwordForm="ngForm">
-  <input type="password" name="password" [(ngModel)]="password" required placeholder="Nouveau mot de passe">
-  <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required placeholder="Confirmer le mot de passe">
-  <button type="submit">Modifier le mot de passe</button>
-</form>
+</div>

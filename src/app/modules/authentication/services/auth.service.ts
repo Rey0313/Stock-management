@@ -51,8 +51,11 @@ export class AuthService {
   }
 
   getUserId(): string {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    return currentUser.userId;
+    if (typeof localStorage !== 'undefined') {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      return currentUser.userId;
+    }
+    return '';
   }
 
   getCurrentUser(): any {

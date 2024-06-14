@@ -36,11 +36,14 @@ import { RouterModule } from '@angular/router';
   ],
 })
 export class HeaderComponent {
+  users: any[] = [];
   isScrolled = false;
   isCollapsed = true;
+  userId: string | null = null;
 
   constructor(library: FaIconLibrary, private authService: AuthService, private router: Router) {
     library.addIcons(faBars, faTimes);
+    this.userId = this.authService.getUserId();
   }
 
   @HostListener('window:scroll', [])
@@ -73,5 +76,12 @@ export class HeaderComponent {
     }
     this.router.navigate(['/']);
     
+  }
+
+  updateUserProfile() {
+    if (this.userId) {
+      this.router.navigate([`/update-user/${this.userId}`]);
+      this.closeMenu();
+    }
   }
 }

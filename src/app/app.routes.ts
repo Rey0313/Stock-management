@@ -14,10 +14,15 @@ import { DashboardAdminComponent } from './modules/dashboard-admin/dashboard-adm
 import { NotificationsComponent } from './modules/notifications/components/notifications/notifications.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+    },
 
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
     },
     {
         path: 'dashboard',
