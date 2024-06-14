@@ -1,15 +1,35 @@
-<form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <select name="type" ngModel required>
-        <option value="" disabled>Sélectionner un type de matériel</option>
-        <option value="Matériel informatique">Matériel informatique</option>
-        <option value="Meuble">Meuble</option>
-        <option value="Papeterie">Papeterie</option>
-    </select>
-    
-    <input type="text" name="name" ngModel required placeholder="Nom du matériel">
-    
-    <input type="date" name="renewal_date" ngModel required placeholder="Date de renouvellement du matériel">
-    
-    <button type="submit">Ajouter matériel</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="d-flex justify-content-left align-items-center mb-3">
+          <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+          <h2 class="ms-2">Ajouter un nouveau matériel</h2>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+              <div class="form-group mb-3">
+                <label for="type" class="form-label">Type de matériel</label>
+                <select id="type" name="type" class="form-select" ngModel required>
+                  <option value="" disabled selected>Sélectionner un type de matériel</option>
+                  <option value="Matériel informatique">Matériel informatique</option>
+                  <option value="Meuble">Meuble</option>
+                  <option value="Papeterie">Papeterie</option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="name" class="form-label">Nom du matériel</label>
+                <input id="name" type="text" name="name" class="form-control" ngModel required placeholder="Nom du matériel">
+              </div>
+              <div class="form-group mb-4">
+                <label for="renewal_date" class="form-label">Date de renouvellement du matériel</label>
+                <input id="renewal_date" type="date" name="renewal_date" class="form-control" ngModel required placeholder="Date de renouvellement du matériel">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Ajouter matériel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   

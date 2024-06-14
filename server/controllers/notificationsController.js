@@ -66,3 +66,16 @@ exports.checkRenewalDates = async (req, res) => {
         res.status(500).json({ error: 'Erreur lors de la vérification des dates de renouvellement : ' + err });
     }
 };
+
+exports.deleteNotification = async (req, res) => {
+    try {
+        const notificationId = req.params.id;
+        const notification = await Notifications.findByIdAndDelete(notificationId);
+        if (!notification) {
+            return res.status(404).json({ error: 'Notification non trouvée' });
+        }
+        res.status(200).json({ message: 'Notification supprimée' });
+    } catch (err) {
+        res.status(500).json({ error: 'Erreur lors de la suppression de la notification : ' + err });
+    }
+};

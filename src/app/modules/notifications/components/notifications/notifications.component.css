@@ -22,3 +22,7 @@
     min-width: 150px;
   }
   
+  .fa-trash {
+    cursor: pointer;
+  }
+  

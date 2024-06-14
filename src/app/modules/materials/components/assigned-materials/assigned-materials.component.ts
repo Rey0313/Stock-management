@@ -37,6 +37,10 @@ export class AssignedMaterialsComponent {
     }, {});
   }
 
+  isAssignedMaterialsEmpty(): boolean {
+    return Object.keys(this.groupedAssignedMaterials).length === 0;
+  }
+  
   askReturn(materialId: any) {
     this.materialService.askReturn(materialId)
       .subscribe({

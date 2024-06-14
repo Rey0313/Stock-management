@@ -52,7 +52,7 @@ export const routes: Routes = [
         path: 'stock-list',
         component: StockListComponent,
         canActivate: [canActivateRole],
-        data: { roles: 'admin' }
+        data: { roles: ['admin', 'membre'] }
     },
     {
         path: 'update-user/:id',
@@ -82,7 +82,7 @@ export const routes: Routes = [
         path: 'assigned-materials',
         component: AssignedMaterialsComponent,
         canActivate: [canActivateRole],
-        data: { roles: 'admin' }
+        data: { roles: ['admin', 'membre'] }
     },{
         path: 'notifications',
         component: NotificationsComponent,

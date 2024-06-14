@@ -1,4 +1,7 @@
 <div class="container mt-4">
+  <div class="d-flex align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+  </div>
   <h2 class="mb-4">Notifications</h2>
   <div *ngIf="notifications.length === 0" class="alert alert-info">
     Aucune notification à afficher.
@@ -9,7 +12,10 @@
         <p class="card-text">{{ notification.message }}</p>
         <small class="text-muted">{{ notification.date | date:'short' }}</small>
       </div>
-      <button *ngIf="!notification.read" class="btn btn-outline-primary" (click)="markAsRead(notification._id)">Marquer comme lue</button>
+      <div class="d-inline-flex align-items-center">
+        <button *ngIf="!notification.read" class="btn btn-outline-primary mx-3" (click)="markAsRead(notification._id)">Marquer comme lue</button>
+        <fa-icon [icon]="['fas', 'trash']" class="text-danger" (click)="deleteNotification(notification._id)" style="cursor: pointer;"></fa-icon>
+      </div>
     </div>
   </div>
 </div>

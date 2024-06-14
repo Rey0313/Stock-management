@@ -7,6 +7,9 @@
           <h1 class="h2 ms-2">Matériels assignés</h1>
         </div>
       </div>
+      <div *ngIf="isAssignedMaterialsEmpty()" class="alert alert-info">
+        Aucun matériel n'est assigné.
+      </div>
 
       <div class="row" *ngFor="let type of (groupedAssignedMaterials | keyvalue)">
         <div class="col-12">

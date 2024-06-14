@@ -33,4 +33,9 @@ export class NotificationsService {
     const headers = this.getHeaders();
     return this.http.post(`${this.apiUrl}/check`, {}, { headers });
   }
+
+  deleteNotification(notificationId: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(`${this.apiUrl}/${notificationId}`, { headers }); // Méthode DELETE pour supprimer une notification
+  }
 }

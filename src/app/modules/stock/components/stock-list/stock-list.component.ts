@@ -4,8 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { StockService } from '../../services/stock.service';
 import { RequestsService } from '../../../requests/services/requests.service';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../authentication/services/auth.service';
 
 @Component({
   selector: 'app-stock-list',
@@ -22,9 +23,10 @@ export class StockListComponent implements OnInit {
     private stockService: StockService,
     private requestService: RequestsService,
     private library: FaIconLibrary,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
-    library.addIcons(faArrowLeft);
+    library.addIcons(faArrowLeft, faPlus);
   }
 
   ngOnInit(): void {
@@ -63,5 +65,13 @@ export class StockListComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/dashboard']);
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  navigateToAddMaterial() {
+    this.router.navigate(['/add-material']);
   }
 }

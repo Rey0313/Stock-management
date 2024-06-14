@@ -3,11 +3,14 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StockService } from '../../services/stock.service';
 import { Router } from '@angular/router';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
     selector: 'app-add-materials',
     standalone: true,
-    imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, FontAwesomeModule],
     templateUrl: './add-materials.component.html',
     styleUrl: './add-materials.component.css'
 })
@@ -15,8 +18,11 @@ export class AddMaterialsComponent {
 
     constructor(
         private stockService: StockService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private library: FaIconLibrary
+    ) { 
+        library.addIcons(faArrowLeft);
+    }
 
     onSubmit(form: NgForm) {
         if (form.valid) {
@@ -34,5 +40,9 @@ export class AddMaterialsComponent {
             });
         }
     }
+    
+    goBack() {
+        this.router.navigate(['/stock-list']); 
+      }
 
 }
