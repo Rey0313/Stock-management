@@ -85,3 +85,18 @@ exports.askReturn = async (req, res) => {
     }
         
 };
+
+exports.getMaterialsByType = async (req, res) => {
+    try {
+        const materials = await Material.aggregate([
+            { $group: { _id: '$type', count: { $sum: 1 } } }
+        ]);
+        const labels = materials.map(m => m._id);
+        const values = materials.map(m => m.count);
+        res.json({ labels, values });
+    } catch (err) {
+        console.error('Erreur lors de la récupération des matériels par type :', err);
+        res.status(500).send('Erreur lors de la récupération des matériels par type : ' + err);
+    }
+};
+  

@@ -44,4 +44,12 @@ export class MaterialsService {
     );
   }
 
+  getMaterialsByType(): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${this.apiUrl}/byType`, { headers }).pipe(
+      catchError((error) => {
+        throw "Erreur lors de la récupération des matériels par type: " + error;
+      })
+    );
+  }
 }
