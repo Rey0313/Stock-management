@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const stockRoutes = require('./routes/stockRoutes');
 const requestRoutes = require('./routes/requestRoutes');
 const materialRoutes = require('./routes/materialRoutes');
+const notificationsRouter = require('./routes/notificationsRouter')
 const cors = require('cors');
 var app = express();
 
@@ -21,6 +22,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/materials', stockRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/materials', materialRoutes);
+app.use('/api/notifications', notificationsRouter);
 
 async function startServer() {
     try {

@@ -11,6 +11,7 @@ import { MyRequestListComponent } from './modules/requests/components/my-request
 import { AssignedMaterialsComponent } from './modules/materials/components/assigned-materials/assigned-materials.component';
 import { DashboardComponent } from './modules/dashboard/components/dashboard/dashboard.component';
 import { DashboardAdminComponent } from './modules/dashboard-admin/dashboard-admin.component';
+import { NotificationsComponent } from './modules/notifications/components/notifications/notifications.component';
 
 export const routes: Routes = [
 
@@ -75,6 +76,11 @@ export const routes: Routes = [
     {
         path: 'assigned-materials',
         component: AssignedMaterialsComponent,
+        canActivate: [canActivateRole],
+        data: { roles: 'admin' }
+    },{
+        path: 'notifications',
+        component: NotificationsComponent,
         canActivate: [canActivateRole],
         data: { roles: 'admin' }
     }

@@ -12,6 +12,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './dashboard-admin.component.html',
   styleUrl: './dashboard-admin.component.css'
 })
+
 export class DashboardAdminComponent {
   constructor(private titleService: Title, private router: Router, private library: FaIconLibrary) {
     this.titleService.setTitle("Tableau de bord Admin - Material Manageur");
