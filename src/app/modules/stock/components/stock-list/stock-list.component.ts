@@ -9,7 +9,7 @@ import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../authentication/services/auth.service';
 import { RoomService } from '../../../rooms/services/room.service';
-import * as bootstrap from 'bootstrap';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-stock-list',
@@ -85,10 +85,21 @@ export class StockListComponent implements OnInit {
     if (this.selectedMaterialId && this.selectedRoom) {
       this.requestService.askAssigned(this.selectedMaterialId, this.selectedRoom).subscribe({
         next: (response) => {
-          console.log('Demande créée avec succès', response);
+          swal({
+            title: 'Demande créée',
+            text: 'Votre demande a bien été créée',
+            icon: 'success',
+          }).then(() => {
+            this.router.navigate(['/dashboard']); 
+          });
         },
         error: (error) => {
           console.error('Erreur lors de la création de la demande', error);
+          swal({
+            title: 'Erreur',
+            text: 'Une erreur est survenue lors de la création de la demande',
+            icon: 'error',
+          });
         }
       });
     }
