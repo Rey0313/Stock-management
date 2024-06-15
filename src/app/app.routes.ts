@@ -45,6 +45,8 @@ export const routes: Routes = [
     {
         path: 'create-user',
         component: CreateUserComponent,
+        canActivate: [canActivateRole],
+        data: { roles: ['admin'] }
     },
     {
         path: 'stock-list',

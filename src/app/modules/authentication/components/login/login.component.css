@@ -1,3 +1,8 @@
 .full-height-minus {
     height: calc(100vh - 80px);
   }
+
+.larger-form {
+    width: 50%;
+    max-width: 600px;
+  }

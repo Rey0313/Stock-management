@@ -7,7 +7,6 @@ import { AuthService } from '../../../authentication/services/auth.service';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -75,7 +74,6 @@ export class HeaderComponent {
       this.isCollapsed = !this.isCollapsed;
     }
     this.router.navigate(['/']);
-    
   }
 
   updateUserProfile() {

@@ -49,8 +49,7 @@
     width: 100%;
     z-index: 999;
     overflow-y: auto;
-    display: block;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 80px);
 }
 .collapse.navbar-collapse.show {
     opacity: 1;
@@ -73,7 +72,7 @@
     width: 100%;
     text-align: left;
     flex-grow: 1;
-    padding-left:50px;
+    padding-left: 50px;
 }
 .navbar-nav .nav-item:first-child {
     padding-top: 20px;

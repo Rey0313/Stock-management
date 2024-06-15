@@ -24,7 +24,6 @@ export class DashboardComponent {
   ngOnInit(): void {
     const currentUser = this.authService.getCurrentUser();
     if (currentUser && currentUser.role === 'admin') {
-      console.log("Hello, je vais check les dates ");
       this.notificationsManager.checkRenewalDates().subscribe({
         next: () => console.log('Renewal dates checked successfully'),
         error: (err) => console.error('Error checking renewal dates', err),

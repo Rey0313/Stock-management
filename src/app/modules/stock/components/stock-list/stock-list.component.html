@@ -23,6 +23,7 @@
             <div class="card-body d-flex justify-content-center align-items-center flex-column">
               <p class="card-text">{{ material.name ? material.name : 'Nom non disponible' }}</p>
               <button class="btn btn-primary mt-auto" (click)="askAssigned(material._id)">Demande d'attribution</button>
+              <button *ngIf="isAdmin()" class="btn btn-danger mt-2" (click)="deleteMaterial(material._id)">Supprimer</button>
             </div>
           </div>
         </div>

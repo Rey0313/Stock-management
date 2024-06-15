@@ -6,6 +6,12 @@
             <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
             <h1 class="h2 ms-2">Liste des utilisateurs</h1>
           </div>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-primary" (click)="navigateToAddMaterial()">
+              <fa-icon [icon]="['fas', 'plus']" class="me-2"></fa-icon>
+              Ajouter un utilisateur
+            </button>
+          </div>
         </div>
   
         <div class="row">

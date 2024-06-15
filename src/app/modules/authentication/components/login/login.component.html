@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center full-height-minus">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="p-5 border rounded shadow-sm bg-white">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="p-5 border rounded shadow-sm bg-white larger-form">
     <h2 class="text-center mb-4">Se connecter</h2>
     <div class="mb-3">
       <input type="email" [(ngModel)]="mail" name="mail" class="form-control" placeholder="Email" required>
@@ -14,9 +14,6 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary btn-block w-100 mb-3">Se connecter</button>
-    <div class="d-flex justify-content-between">
-      <a href="#" class="text-decoration-none me-3">Mot de passe oublié ?</a>
-      <a [routerLink]="['/create-user']" class="text-decoration-none text-end">Pas de compte ? S'inscrire</a>
-    </div>
   </form>
 </div>
+

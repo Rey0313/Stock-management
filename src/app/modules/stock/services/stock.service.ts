@@ -41,4 +41,13 @@ export class StockService {
         })
       );
     }
+
+    deleteMaterial(materialId: any): Observable<void> {
+      const headers = this.getHeaders();
+      return this.http.delete<void>(`${this.apiUrl}/${materialId}`, { headers }).pipe(
+        catchError((error) => {
+          throw "Erreur lors de la suppression du matériel: " + error;
+        })
+      );
+    }
 }

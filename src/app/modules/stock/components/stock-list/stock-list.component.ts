@@ -63,6 +63,19 @@ export class StockListComponent implements OnInit {
     });
   }
 
+  deleteMaterial(materialId: any) {
+    this.stockService.deleteMaterial(materialId).subscribe({
+      next: () => {
+        this.materialsList = this.materialsList.filter(material => material._id !== materialId);
+        this.groupMaterialsByType();
+        console.log('Matériel supprimé avec succès');
+      },
+      error: (error) => {
+        console.error('Erreur lors de la suppression du matériel', error);
+      }
+    });
+  }
+
   goBack() {
     this.router.navigate(['/dashboard']);
   }

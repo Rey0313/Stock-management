@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -18,7 +18,7 @@ export class UserListComponent {
     users: any[] = [];
 
   constructor(private userService: UserService, private router: Router, private library: FaIconLibrary, private titleService: Title) {
-    library.addIcons(faArrowLeft);
+    library.addIcons(faArrowLeft, faPlus);
     this.titleService.setTitle("Utilisateurs - Material Manageur");
   }
 
@@ -43,5 +43,9 @@ export class UserListComponent {
 
   goBack() {
     this.router.navigate(['/dashboard-admin']);
+  }
+
+  navigateToAddMaterial() {
+    this.router.navigate(['/create-user']);
   }
 }
