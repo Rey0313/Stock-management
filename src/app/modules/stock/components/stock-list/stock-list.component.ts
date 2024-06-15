@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { StockService } from '../../services/stock.service';
@@ -7,24 +8,34 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../authentication/services/auth.service';
+import { RoomService } from '../../../rooms/services/room.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-stock-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FontAwesomeModule],
+  imports: [CommonModule, HttpClientModule, FontAwesomeModule, FormsModule],
   templateUrl: './stock-list.component.html',
   styleUrls: ['./stock-list.component.css']
 })
 export class StockListComponent implements OnInit {
+  @ViewChild('assignModal', { static: true }) assignModalElement!: ElementRef;
+
   materialsList: any[] = [];
   groupedMaterials: { [type: string]: any[] } = {};
+  rooms: any[] = [];
+  selectedRoom: string | undefined;
+  selectedMaterialId: string | undefined;
+  isModalOpen = false;
 
   constructor(
     private stockService: StockService,
     private requestService: RequestsService,
     private library: FaIconLibrary,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private roomService: RoomService
+
   ) {
     library.addIcons(faArrowLeft, faPlus);
   }
@@ -37,6 +48,15 @@ export class StockListComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading materials:', error);
+      }
+    });
+
+    this.roomService.getRooms().subscribe({
+      next: (rooms) => {
+        this.rooms = rooms;
+      },
+      error: (error) => {
+        console.error('Error loading rooms:', error);
       }
     });
   }
@@ -52,15 +72,27 @@ export class StockListComponent implements OnInit {
     }, {});
   }
 
-  askAssigned(materialId: any) {
-    this.requestService.askAssigned(materialId).subscribe({
-      next: (response) => {
-        console.log('Demande créée avec succès', response);
-      },
-      error: (error) => {
-        console.error('Erreur lors de la création de la demande', error);
-      }
-    });
+  openAssignModal(materialId: any) {
+    this.selectedMaterialId = materialId;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  assignMaterial() {
+    if (this.selectedMaterialId && this.selectedRoom) {
+      this.requestService.askAssigned(this.selectedMaterialId, this.selectedRoom).subscribe({
+        next: (response) => {
+          console.log('Demande créée avec succès', response);
+        },
+        error: (error) => {
+          console.error('Erreur lors de la création de la demande', error);
+        }
+      });
+    }
+    this.closeModal();
   }
 
   goBack() {

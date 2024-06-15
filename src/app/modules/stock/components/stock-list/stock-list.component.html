@@ -22,11 +22,37 @@
           <div class="card h-100">
             <div class="card-body d-flex justify-content-center align-items-center flex-column">
               <p class="card-text">{{ material.name ? material.name : 'Nom non disponible' }}</p>
-              <button class="btn btn-primary mt-auto" (click)="askAssigned(material._id)">Demande d'attribution</button>
+              <button class="btn btn-primary mt-auto" (click)="openAssignModal(material._id)">Demande d'attribution</button>
             </div>
           </div>
         </div>
       </div>
     </main>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+<div class="modal" tabindex="-1" *ngIf="isModalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sélectionner une salle</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="roomSelect" class="form-label">Salle</label>
+            <select class="form-select" id="roomSelect" [(ngModel)]="selectedRoom" name="selectedRoom">
+              <option *ngFor="let room of rooms" [value]="room._id">{{ room.name }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="assignMaterial()">Valider</button>
+      </div>
+    </div>
   </div>
 </div>
