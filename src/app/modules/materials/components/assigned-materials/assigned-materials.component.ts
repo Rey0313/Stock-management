@@ -6,6 +6,7 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-assigned-materials',
@@ -45,9 +46,20 @@ export class AssignedMaterialsComponent {
     this.materialService.askReturn(materialId)
       .subscribe({
         next: (response) => {
-          console.log('Demande de retour créée avec succès', response);
+          swal({
+            title: 'Demande de retour créée',
+            text:  'Votre demande de retour a bien été créée',
+            icon: 'success',
+          }).then(() => {
+            this.router.navigate(['/dashboard']); 
+          });
         },
         error: (error) => {
+          swal({
+            title: 'Erreur',
+            text: 'Erreur lors de la création de la demande de retour',
+            icon: 'error',
+          });
           console.error('Erreur lors de la création de la demande de retour', error);
         }
       });

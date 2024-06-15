@@ -8,6 +8,7 @@ var requestSchema = new Schema({
     type: {type: String, required: true},
     status: { type: String, required: true },
     request_date: { type: Date, default: Date.now },
+    room: { type: Schema.Types.ObjectId, ref: 'Room' }
 });
 
 var requestModel = mongoose.model('Request', requestSchema);

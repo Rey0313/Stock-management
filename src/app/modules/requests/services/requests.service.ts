@@ -38,12 +38,13 @@ export class RequestsService {
     );
   }
 
-  askAssigned(materialId: string): Observable<any[]> {
+  askAssigned(materialId: string, roomId: string): Observable<any[]> {
     const headers = this.getHeaders();
     const userId = this.authService.getUserId();
     return this.http.post<any>(this.apiUrl, {
       user: userId,
       material: materialId,
+      room: roomId,
       status: 'en_attente',
       type: "attribution"
     }, { headers }).pipe(

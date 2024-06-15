@@ -1,17 +1,24 @@
 <div class="container-fluid">
     <div class="row">
         <main class="col-12">
-            <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <div class="d-flex align-items-center">
-                    <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()"
-                        style="cursor: pointer;"></fa-icon>
+                    <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
                     <h1 class="h2 ms-2">Liste des demandes</h1>
+                </div>
+                <button class="btn btn-primary" (click)="toggleFilter()">
+                    {{ showPendingOnly ? 'Afficher toutes les demandes' : 'Afficher uniquement les demandes en attente' }}
+                </button>
+            </div>
+
+            <div class="row" *ngIf="filteredRequests.length === 0">
+                <div class="col-12 text-center ">
+                    <p class="text-muted alert alert-info">Aucune demande en attente</p>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4 mb-4" *ngFor="let request of requests">
+            <div class="row" *ngIf="filteredRequests.length > 0">
+                <div class="col-md-4 mb-4" *ngFor="let request of filteredRequests">
                     <div class="card-container">
                         <div class="card">
                             <div class="card-front">
@@ -46,8 +53,6 @@
                     </div>
                 </div>
             </div>
-            
-            
         </main>
     </div>
 </div>

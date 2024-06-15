@@ -138,6 +138,7 @@ exports.acceptAssign = async (req, res) => {
         }
 
         material.isStored = false;
+        material.room = request.room;
         
         material.assignments.push({
             user: request.user,
