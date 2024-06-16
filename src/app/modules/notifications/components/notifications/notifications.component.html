@@ -1,8 +1,8 @@
 <div class="container mt-4">
   <div class="d-flex align-items-center pt-3 pb-2 mb-3 border-bottom">
     <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
+    <h1 class="h2 ms-2">Notifications</h1>
   </div>
-  <h2 class="mb-4">Notifications</h2>
   <div *ngIf="notifications.length === 0" class="alert alert-info">
     Aucune notification à afficher.
   </div>

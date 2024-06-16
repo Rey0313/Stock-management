@@ -19,7 +19,7 @@ export class NotificationsComponent implements OnInit {
   notifications: any[] = [];
 
   constructor(private notificationsService: NotificationsService, private router: Router, private library: FaIconLibrary, private titleService: Title,) {
-    this.titleService.setTitle("Notifications");
+    this.titleService.setTitle("Notifications - Material Manageur");
     this.library.addIcons(faArrowLeft);
     this.library.addIcons(faTrash);
   }

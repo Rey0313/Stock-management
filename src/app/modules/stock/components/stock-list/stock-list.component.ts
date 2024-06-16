@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../authentication/services/auth.service';
 import { RoomService } from '../../../rooms/services/room.service';
 import swal from 'sweetalert';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-stock-list',
@@ -34,10 +35,12 @@ export class StockListComponent implements OnInit {
     private library: FaIconLibrary,
     private router: Router,
     private authService: AuthService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private titleService: Title
 
   ) {
     library.addIcons(faArrowLeft, faPlus);
+    this.titleService.setTitle('Stock - Material Manageur');
   }
 
   ngOnInit(): void {
@@ -111,10 +114,19 @@ export class StockListComponent implements OnInit {
       next: () => {
         this.materialsList = this.materialsList.filter(material => material._id !== materialId);
         this.groupMaterialsByType();
-        console.log('Matériel supprimé avec succès');
+        swal({
+          title: 'Matériel supprimé',
+          text: 'Le matériel a bien été supprimé',
+          icon: 'success',
+        });
       },
       error: (error) => {
         console.error('Erreur lors de la suppression du matériel', error);
+        swal({
+          title: 'Erreur',
+          text: 'Une erreur est survenue lors de la suppression du matériel',
+          icon: 'error',
+        });
       }
     });
   }

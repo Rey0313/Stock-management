@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-user',
@@ -21,9 +22,11 @@ export class CreateUserComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private library: FaIconLibrary
+    private library: FaIconLibrary,
+    private titleService: Title
   ) {
     library.addIcons(faArrowLeft);
+    this.titleService.setTitle('Créer un utilisateur - Material Manageur');
   }
 
   onRoleChange(value: string) {
