@@ -1,71 +1,86 @@
 <div class="row">
-    <div class="col-md-6">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Nombre de matériels par type</h5>
-          <canvas #materialsByTypeChart></canvas>
-        </div>
-      </div>
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="card-title mb-0">Matériels utilisés</h5>
-          </div>
-          <div class="row">
-            <div class="col-md-12 mb-2" *ngFor="let usedMaterial of usedMaterials">
-              <div class="card p-2 d-flex justify-content-center align-items-center flex-column">
-                <span class="card-text">{{ usedMaterial.room.name }}</span>
-                <span class="card-text text-decoration-underline text-uppercase fw-bold">{{ usedMaterial.name }}</span>
-                <span class="card-text upper-subtitle">{{ usedMaterial.type }}</span>
-                <span class="card-text" *ngFor="let assignment of usedMaterial.assignments">
-                    {{ assignment.user.firstname }} {{ assignment.user.lastname }}
-                  </span>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="col-md-6">
+    <div class="card mb-4 shadow-sm purple-card">
+      <div class="card-body">
+        <h5 class="card-title">Nombre de matériels par type</h5>
+        <canvas #materialsByTypeChart></canvas>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="card-title mb-0">Liste des salles</h5>
-            <button class="btn btn-primary" (click)="openRoomModal()">Ajouter une salle</button>
-          </div>
-          <div class="row">
-            <div class="col-md-12 mb-2" *ngFor="let room of rooms">
-              <div class="card p-2 d-flex justify-content-center align-items-center flex-column">
-                <span class="card-text text-decoration-underline">{{ room.name }}</span>
-              </div>
+    <div class="card mb-4 shadow-sm green-card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h5 class="card-title mb-0">Matériels utilisés</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-2" *ngFor="let usedMaterial of usedMaterials">
+            <div class="card p-2 d-flex justify-content-center align-items-center flex-column">
+              <span class="card-text">{{ usedMaterial.room.name }}</span>
+              <span class="card-text text-decoration-underline text-uppercase fw-bold">{{ usedMaterial.name }}</span>
+              <span class="card-text" *ngFor="let assignment of usedMaterial.assignments">
+                {{ assignment.user.firstname }} {{ assignment.user.lastname }}
+              </span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
-  <div class="modal" tabindex="-1" *ngIf="isModalOpen">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Ajouter une salle</h5>
-          <button type="button" class="btn-close" (click)="closeModal()"></button>
+  <div class="col-md-6">
+    <div class="card mb-4 shadow-sm yellow-card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h5 class="card-title mb-0">Liste des salles</h5>
+          <button class="btn btn-primary" (click)="openRoomModal()">Ajouter une salle</button>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="roomName" class="form-label">Nom de la salle</label>
-              <input type="text" class="form-control" id="roomName" [(ngModel)]="roomName" name="roomName">
+        <div class="row">
+          <div class="col-md-12 mb-2" *ngFor="let room of (showAllRooms ? rooms : rooms.slice(0, 4))">
+            <div class="card p-2 d-flex justify-content-center align-items-center flex-column">
+              <span class="card-text">{{ room.name }}</span>
             </div>
-          </form>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Annuler</button>
-          <button type="button" class="btn btn-primary" (click)="createRoom()">Valider</button>
+        <div class="d-flex justify-content-center">
+        <button class="btn btn-secondary mt-1 show-more-btn" (click)="toggleRoomList()">
+          <fa-icon [icon]="showAllRooms ? 'chevron-up' : 'chevron-down'"></fa-icon>
+          {{ showAllRooms ? 'Voir moins de salles' : 'Voir plus de salles' }}
+        </button>
+      </div>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm blue-card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h5 class="card-title mb-0">Nombre de matériels</h5>
+        </div>
+        <div class="row">
+          <span class="card-text">{{ totalMaterials }} matériels enregistrés</span>
+          <span class="card-text">{{ totalUsedMaterials }} matériels utilisés</span>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<div class="modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+<div class="modal" tabindex="-1" *ngIf="isModalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter une salle</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="roomName" class="form-label">Nom de la salle</label>
+            <input type="text" class="form-control" id="roomName" [(ngModel)]="roomName" name="roomName">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="createRoom()">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
