@@ -4,6 +4,7 @@ var roomController = require('../controllers/roomController');
 
 
 router.get('/', roomController.getAllRooms);
+router.post('/', roomController.addRoom);
 
 
 module.exports = router;

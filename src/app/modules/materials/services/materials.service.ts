@@ -52,4 +52,13 @@ export class MaterialsService {
       })
     );
   }
+
+  getUsedMaterials(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}/used`, { headers }).pipe(
+      catchError((error) => {
+        throw "Erreur lors de la récupération des matériels utilisés : " + error;
+      })
+    );
+  }
 }

@@ -29,5 +29,14 @@ export class RoomService {
     );
   }
 
+  addRoom(roomName: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(this.apiUrl, { name: roomName }, { headers }).pipe(
+      catchError((error) => {
+        throw "Erreur lors de l'ajout de la salle: " + error;
+      })
+    );
+  }
+
 
 }

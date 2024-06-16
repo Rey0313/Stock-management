@@ -99,4 +99,13 @@ exports.getMaterialsByType = async (req, res) => {
         res.status(500).send('Erreur lors de la récupération des matériels par type : ' + err);
     }
 };
-  
+
+
+exports.getUsedMaterials = async (req, res) => {
+    try {
+        const usedMaterials = await Material.find({ isStored: false }).populate('room').populate('assignments.user');
+        res.status(200).json(usedMaterials);
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la récupération des matériels utilisés", error });
+    }
+};

@@ -8,3 +8,13 @@ exports.getAllRooms = async (req, res) => {
         res.status(500).send('Erreur lors de la récupération des salles : ' + err);
     }
 };
+
+exports.addRoom = async (req, res) => {
+    try {
+        const room = new Room(req.body);
+        await room.save();
+        res.json(room);
+    } catch (err) {
+        res.status(500).send('Erreur lors de la création de la salle : ' + err);
+    }
+};
