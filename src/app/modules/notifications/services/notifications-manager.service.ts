@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotificationsService } from './notifications.service'; // Assurez-vous du bon chemin d'importation
+import { NotificationsService } from './notifications.service';
 import { Observable } from 'rxjs';
 
 @Injectable({

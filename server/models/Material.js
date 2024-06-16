@@ -14,7 +14,12 @@ var materialSchema = new Schema({
     renewal_date: { type: Date, required: true },
     isStored: { type: Boolean, required: true },
     room: { type: Schema.Types.ObjectId, ref: 'Room' },
-    assignments: [assignmentSchema]
+    assignments: [assignmentSchema],
+    access: {
+        membre: { type: Boolean, required: true },
+        organisme: { type: Boolean, required: true },
+        admin: { type: Boolean, default: true, required: true }
+    }
 });
 
 var materialModel = mongoose.model('Material', materialSchema);

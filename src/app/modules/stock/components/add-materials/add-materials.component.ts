@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-
 @Component({
     selector: 'app-add-materials',
     standalone: true,
@@ -15,6 +14,8 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
     styleUrl: './add-materials.component.css'
 })
 export class AddMaterialsComponent {
+
+    noSwitchSelected: boolean = false;
 
     constructor(
         private stockService: StockService,
@@ -25,12 +26,19 @@ export class AddMaterialsComponent {
     }
 
     onSubmit(form: NgForm) {
-        if (form.valid) {
+        this.noSwitchSelected = !this.atLeastOneSelected(form);
+
+        if (form.valid && !this.noSwitchSelected) {
             const formData = { 
                 ...form.value,
                 room : "66300e083db89c85b82fb93e",
                 isStored: true,
-                assignments: null
+                assignments: null,
+                access: {
+                    membre: form.value.member || false,
+                    organisme: form.value.organization || false,
+                    admin: true
+                  }
             };
             this.stockService.addMaterial(formData).subscribe({
                 next: (material) => {
@@ -38,11 +46,22 @@ export class AddMaterialsComponent {
                 },
                 error: (error) => console.error(error)
             });
+        } else {
+            this.markFormControlsAsTouched(form);
         }
+    }
+
+    markFormControlsAsTouched(form: NgForm) {
+        Object.keys(form.controls).forEach(controlName => {
+          form.controls[controlName].markAsTouched();
+        });
+      }
+
+    atLeastOneSelected(form: NgForm): boolean {
+        return form.value.member || form.value.organization;
     }
     
     goBack() {
         this.router.navigate(['/stock-list']); 
-      }
-
+    }
 }

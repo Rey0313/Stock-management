@@ -31,7 +31,6 @@ export class NotificationsComponent implements OnInit {
   loadNotifications(): void {
     this.notificationsService.getNotifications().subscribe({
       next: (data) => {
-        console.log('Notifications récupérées :', data);
         this.notifications = data;
       },
       error: (error) => console.error('Erreur lors de la récupération des notifications', error)

@@ -46,7 +46,7 @@ export class StockListComponent implements OnInit {
   ngOnInit(): void {
     this.stockService.getMaterialsList().subscribe({
       next: (materialsList) => {
-        this.materialsList = materialsList;
+        this.materialsList = this.filterMaterialsByRole(materialsList);
         this.groupMaterialsByType();
       },
       error: (error) => {
@@ -63,6 +63,22 @@ export class StockListComponent implements OnInit {
       }
     });
   }
+
+  private filterMaterialsByRole(materials: any[]): any[] {
+    const user = this.authService.getCurrentUser();
+    const role = user.role;
+    const isAdmin = role === 'admin';
+
+    return materials.filter(material => {
+        const hasRoleAccess = Boolean(material.access[role]);
+        const hasAdminAccess = Boolean(material.access.admin);
+        if (isAdmin) {
+            return hasAdminAccess || hasRoleAccess;
+        } else {
+            return hasRoleAccess;
+        }
+    });
+}
 
   private groupMaterialsByType() {
     this.groupedMaterials = this.materialsList.reduce((acc, material) => {

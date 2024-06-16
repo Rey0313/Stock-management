@@ -35,9 +35,7 @@ export class AuthService {
   }
 
   logout(): void {
-    console.log('Local storage avant: ', localStorage.getItem('currentUser'));
     localStorage.removeItem('currentUser');
-    console.log('Local storage apres: ', localStorage.getItem('currentUser'));
   }
 
   decodeToken(token: string): any {
