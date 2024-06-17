@@ -73,7 +73,7 @@ export class HeaderComponent {
     if(!this.isCollapsed) {
       this.isCollapsed = !this.isCollapsed;
     }
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   updateUserProfile() {
