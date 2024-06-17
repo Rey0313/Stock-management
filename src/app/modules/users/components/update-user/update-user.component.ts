@@ -32,9 +32,9 @@ export class UpdateUserComponent implements OnInit {
   ) {
     library.addIcons(faArrowLeft);
     if (this.currentUserRole === 'admin') {
-    this.titleService.setTitle('Modifier un utilisateur - Material Manageur');
-    }else{
-    this.titleService.setTitle('Modifier mon profil - Material Manageur');
+      this.titleService.setTitle('Modifier un utilisateur - Material Manageur');
+    } else {
+      this.titleService.setTitle('Modifier mon profil - Material Manageur');
     }
   }
 
@@ -88,12 +88,12 @@ export class UpdateUserComponent implements OnInit {
       swal('Erreur', 'Les mots de passe ne correspondent pas.', 'error');
       return;
     }
-  
+
     if (!this.validatePassword(this.password)) {
       swal('Erreur', 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.', 'error');
       return;
     }
-  
+
     this.userService.updateUserPassword(this.user._id, this.password).subscribe({
       next: (response) => {
         swal('Succès', 'Mot de passe mis à jour avec succès.', 'success');
@@ -127,6 +127,25 @@ export class UpdateUserComponent implements OnInit {
       this.router.navigate(['/users']);
     } else {
       this.router.navigate(['/dashboard']);
+    }
+  }
+
+  onLastnameChange() {
+    if (this.user.lastname) {
+      this.user.organisation_name = null;
+    }
+  }
+
+  onFirstnameChange() {
+    if (this.user.firstname) {
+      this.user.organisation_name = null;
+    }
+  }
+
+  onOrganisationNameChange() {
+    if (this.user.organisation_name) {
+      this.user.lastname = null;
+      this.user.firstname = null;
     }
   }
 }

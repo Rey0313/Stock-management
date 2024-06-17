@@ -1,12 +1,10 @@
 <div class="container-fluid">
   <div class="row">
     <main class="col-12">
-      <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="d-flex align-items-center">
           <fa-icon [icon]="['fas', 'arrow-left']" class="me-2" (click)="goBack()" style="cursor: pointer;"></fa-icon>
-          <h1 class="h2 ms-2">{{ currentUserRole === 'admin' ? 'Mettre à jour l\'utilisateur' : 'Mettre à jour mon profil' }}
-          </h1>
+          <h1 class="h2 ms-2">{{ currentUserRole === 'admin' ? 'Mettre à jour l\'utilisateur' : 'Mettre à jour mon profil' }}</h1>
         </div>
       </div>
       <div class="col-lg-7 mx-auto">
@@ -22,36 +20,31 @@
                   </select>
                 </div>
 
-                <ng-container
-                  *ngIf="user.role === 'organisme' || user.role === 'membre' || (currentUserRole === 'admin' && user.role === 'admin')">
+                <ng-container *ngIf="user.role === 'organisme' || user.role === 'membre' || (currentUserRole === 'admin' && user.role === 'admin')">
                   <div *ngIf="user.role !== 'organisme'" class="row mb-3">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="firstname">Prénom</label>
-                        <input type="text" name="firstname" [(ngModel)]="user.firstname" required placeholder="Prénom"
-                          class="form-control">
+                        <input type="text" name="firstname" [(ngModel)]="user.firstname" (ngModelChange)="onFirstnameChange()" required placeholder="Prénom" class="form-control">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="lastname">Nom</label>
-                        <input type="text" name="lastname" [(ngModel)]="user.lastname" required placeholder="Nom"
-                          class="form-control">
+                        <input type="text" name="lastname" [(ngModel)]="user.lastname" (ngModelChange)="onLastnameChange()" required placeholder="Nom" class="form-control">
                       </div>
                     </div>
                   </div>
                   <div class="form-group mb-3">
                     <label for="mail">Email</label>
-                    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email"
-                      class="form-control">
+                    <input type="email" name="mail" [(ngModel)]="user.mail" required placeholder="Email" class="form-control">
                   </div>
                 </ng-container>
 
                 <ng-container *ngIf="user.role === 'organisme'">
                   <div class="form-group mb-3">
                     <label for="organisation_name">Nom de l'organisation</label>
-                    <input type="text" name="organisation_name" [(ngModel)]="user.organisation_name" required
-                      placeholder="Nom de l'organisation" class="form-control">
+                    <input type="text" name="organisation_name" [(ngModel)]="user.organisation_name" (ngModelChange)="onOrganisationNameChange()" required placeholder="Nom de l'organisation" class="form-control">
                   </div>
                 </ng-container>
 
@@ -61,16 +54,13 @@
               <form (ngSubmit)="onPasswordChange()" #passwordForm="ngForm" class="mt-4">
                 <div class="form-group mb-3">
                   <label for="password">Nouveau mot de passe</label>
-                  <input type="password" name="password" [(ngModel)]="password" required
-                    placeholder="Nouveau mot de passe" class="form-control">
+                  <input type="password" name="password" [(ngModel)]="password" required placeholder="Nouveau mot de passe" class="form-control">
                 </div>
                 <div class="form-group mb-3">
                   <label for="confirmPassword">Confirmer le mot de passe</label>
-                  <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required
-                    placeholder="Confirmer le mot de passe" class="form-control">
+                  <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required placeholder="Confirmer le mot de passe" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block rounded-pill shadow-sm">Modifier le mot de
-                  passe</button>
+                <button type="submit" class="btn btn-primary btn-block rounded-pill shadow-sm">Modifier le mot de passe</button>
               </form>
             </div>
           </div>
