@@ -4,16 +4,6 @@
 
 ### Projet
 
-#### 1. Organisation
-Le projet est à faire en binôme. En fin de semestre (la date exacte sera précisée ultérieurement), chaque binôme rendra sur Moodle les éléments suivants :
-- Le code de l’application (uniquement votre code et vos données, pas tout le framework)
-- Un rapport (≤10 pages) sur votre travail (ce qui a été réalisé, les choix techniques, etc)
-- Une documentation de déploiement de votre application (librairies à installer, etc)
-
-NB : un seul dépôt par binôme est suffisant, et n’oubliez pas de préciser les noms des deux étudiants dans le rapport.
-
-Des soutenances de projet auront lieu à une date précisée ultérieurement.
-
 #### 2. Sujet du projet
 L’objectif est de développer un site Web permettant au personnel de l'université de gérer le matériel : meubles, téléphones fixes, imprimantes, etc. Le matériel peut être stocké ou utilisé. S'il est stocké, il faut savoir dans quelle salle. S'il est utilisé, il faut aussi savoir dans quelle salle, et à qui le matériel a été confié. Le matériel peut être confié soit à un organisme (par exemple le département informatique), soit à un membre du personnel. Les utilisateurs (organismes ou membres individuels) doivent pouvoir consulter la liste des matériels disponibles, par type. Ils doivent pouvoir demander à se faire attribuer du matériel.
 
