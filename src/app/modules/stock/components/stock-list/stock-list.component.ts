@@ -40,7 +40,7 @@ export class StockListComponent implements OnInit {
 
   ) {
     library.addIcons(faArrowLeft, faPlus);
-    this.titleService.setTitle('Stock - Material Manageur');
+    this.titleService.setTitle('Stock - Material Manager');
   }
 
   ngOnInit(): void {

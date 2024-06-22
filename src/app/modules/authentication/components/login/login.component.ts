@@ -19,7 +19,7 @@ export class LoginComponent {
   password: string = '';
 
   constructor(private authService: AuthService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle("Connexion - Material Manageur");
+    this.titleService.setTitle("Connexion - Material Manager");
   }
 
   onSubmit(form: NgForm) {

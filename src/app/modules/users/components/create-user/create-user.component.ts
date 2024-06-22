@@ -26,7 +26,7 @@ export class CreateUserComponent {
     private titleService: Title
   ) {
     library.addIcons(faArrowLeft);
-    this.titleService.setTitle('Créer un utilisateur - Material Manageur');
+    this.titleService.setTitle('Créer un utilisateur - Material Manager');
   }
 
   onRoleChange(value: string) {

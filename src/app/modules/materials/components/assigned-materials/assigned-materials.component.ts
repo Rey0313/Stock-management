@@ -20,7 +20,7 @@ export class AssignedMaterialsComponent {
 
   constructor(private materialService: MaterialsService, private library: FaIconLibrary, private router: Router, private titleService: Title) {
     library.addIcons(faArrowLeft);
-    this.titleService.setTitle("Matériels assignés - Material Manageur");
+    this.titleService.setTitle("Matériels assignés - Material Manager");
   }
 
   ngOnInit(): void {

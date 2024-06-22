@@ -17,7 +17,7 @@ export class DashboardComponent {
   isAdmin = false;
 
   constructor(private titleService: Title, private authService: AuthService, private notificationsManager: NotificationsManagerService) {
-    this.titleService.setTitle("Tableau de bord - Material Manageur");
+    this.titleService.setTitle("Tableau de bord - Material Manager");
     this.checkAdmin();
   }
 

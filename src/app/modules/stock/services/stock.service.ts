@@ -15,7 +15,7 @@ export class StockService {
     private apiUrl = 'http://localhost:3000/api/materials';
 
     constructor(private http: HttpClient, private authService: AuthService, private titleService: Title) {
-      this.titleService.setTitle("Stock - Material Manageur");
+      this.titleService.setTitle("Stock - Material Manager");
     }
 
     private getHeaders(): HttpHeaders {

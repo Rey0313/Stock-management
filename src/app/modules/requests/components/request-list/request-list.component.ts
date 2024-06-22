@@ -25,7 +25,7 @@ export class RequestListComponent {
 
     constructor(private requestService: RequestsService, private library: FaIconLibrary, private router: Router, private titleService: Title) {
         library.addIcons(faArrowLeft);
-        this.titleService.setTitle("Liste des demandes - Material Manageur");
+        this.titleService.setTitle("Liste des demandes - Material Manager");
     }
 
     ngOnInit(): void {

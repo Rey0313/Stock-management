@@ -19,7 +19,7 @@ export class UserListComponent {
 
   constructor(private userService: UserService, private router: Router, private library: FaIconLibrary, private titleService: Title) {
     library.addIcons(faArrowLeft, faPlus);
-    this.titleService.setTitle("Utilisateurs - Material Manageur");
+    this.titleService.setTitle("Utilisateurs - Material Manager");
   }
 
   deleteUser(userId: any) {

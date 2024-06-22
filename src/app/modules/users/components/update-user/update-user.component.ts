@@ -32,9 +32,9 @@ export class UpdateUserComponent implements OnInit {
   ) {
     library.addIcons(faArrowLeft);
     if (this.currentUserRole === 'admin') {
-      this.titleService.setTitle('Modifier un utilisateur - Material Manageur');
+      this.titleService.setTitle('Modifier un utilisateur - Material Manager');
     } else {
-      this.titleService.setTitle('Modifier mon profil - Material Manageur');
+      this.titleService.setTitle('Modifier mon profil - Material Manager');
     }
   }
 

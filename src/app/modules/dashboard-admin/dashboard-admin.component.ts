@@ -16,7 +16,7 @@ import { DashboardChartsComponent } from '../dashboard-charts/component/dashboar
 
 export class DashboardAdminComponent {
   constructor(private titleService: Title, private router: Router, private library: FaIconLibrary) {
-    this.titleService.setTitle("Tableau de bord Admin - Material Manageur");
+    this.titleService.setTitle("Tableau de bord Admin - Material Manager");
     this.library.addIcons(faArrowLeft);
   }
 
