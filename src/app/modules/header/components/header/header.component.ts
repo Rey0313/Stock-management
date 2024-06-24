@@ -72,6 +72,7 @@ export class HeaderComponent {
     this.authService.logout();
     if(!this.isCollapsed) {
       this.isCollapsed = !this.isCollapsed;
+      document.body.style.overflow = 'auto';
     }
     this.router.navigate(['/login']);
   }
