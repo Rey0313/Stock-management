@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Request = require('../models/Request');
 const Material = require('../models/Material');
-const STOCKAGE_ROOM_ID = '66300e0f96ccd56844571515';
+const STOCKAGE_ROOM_ID = '66799bf602d04452d55aa8d2';
 
 exports.getAllRequests = async (req, res) => {
     try {
